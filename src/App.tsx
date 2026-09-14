@@ -270,7 +270,7 @@ export function App() {
         {currentTerritory && (
           <div
             data-field-panel
-            className="absolute bottom-4 left-3 right-3 sm:left-6 sm:right-auto sm:w-96 z-[450] space-y-2.5 pointer-events-auto max-h-[calc(100dvh-5rem)] overflow-y-auto"
+            className="absolute bottom-3 sm:bottom-4 left-2.5 right-2.5 sm:left-6 sm:right-auto sm:w-96 z-[450] space-y-2 pointer-events-auto max-h-[calc(100dvh-4.5rem)] overflow-y-auto pb-[env(safe-area-inset-bottom,0px)]"
           >
             {/* Strict Status Badge */}
             <StatusBadge
@@ -295,7 +295,7 @@ export function App() {
         {!currentTerritory && !isInvalidIdSpecified && collection && (
           <div
             data-field-panel
-            className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[450] w-[90%] max-w-sm"
+            className="absolute bottom-5 sm:bottom-6 left-1/2 -translate-x-1/2 z-[450] w-[92%] max-w-sm pb-[env(safe-area-inset-bottom,0px)]"
           >
             <button
               onClick={() => setIsTerritoryDrawerOpen(true)}

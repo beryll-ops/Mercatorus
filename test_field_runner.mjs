@@ -208,15 +208,27 @@ async function runTests() {
     });
     console.log('Status badge text when OUTSIDE ~60m:', statusTextOutside);
 
-    // Check NavigationPanel contents
+    // Check NavigationPanel contents and Google Maps button visibility
     const navPanelInfo = await page.evaluate(() => {
       const gmapsLink = document.querySelector('a[href*="google.com/maps"]');
       const href = gmapsLink ? gmapsLink.getAttribute('href') : null;
       const text = document.body.innerText;
+      let gmapsRect = null;
+      if (gmapsLink) {
+        const r = gmapsLink.getBoundingClientRect();
+        gmapsRect = {
+          top: r.top,
+          bottom: r.bottom,
+          height: r.height,
+          clearanceFromScreenBottom: window.innerHeight - r.bottom,
+          fullyVisible: r.bottom <= window.innerHeight && r.top >= 0,
+        };
+      }
       return {
         gmapsUrl: href,
-        hasRouteInfo: text.includes('Trasa do granicy') || text.includes('Dojście'),
+        hasRouteInfo: text.includes('Trasa do granicy') || text.includes('Dojście') || text.includes('Dojazd'),
         fullSnippet: gmapsLink ? gmapsLink.innerText : null,
+        gmapsRect,
       };
     });
     console.log('Navigation Panel info:', navPanelInfo);
@@ -227,6 +239,8 @@ async function runTests() {
       navPanelInfo,
       insideRequirementMet: statusTextInside === 'Jesteś na terenie',
       outsideRequirementMet: statusTextOutside?.startsWith('Jesteś poza terenem (odległość do granicy:'),
+      gmapsButtonFullyVisible: navPanelInfo.gmapsRect?.fullyVisible === true,
+      gmapsButtonClearance: navPanelInfo.gmapsRect?.clearanceFromScreenBottom,
     };
 
     console.log('\n--- TEST 6: PRZEŁĄCZNIK WARSTWY (OSM <-> SATELITA ESRI) ---');

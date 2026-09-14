@@ -94,25 +94,25 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
 
   return (
     <div
-      className={`flex items-center justify-between px-4 py-3 rounded-2xl shadow-xl backdrop-blur-md border transition-all ${
+      className={`flex items-center justify-between px-3 py-2 sm:px-4 sm:py-2.5 rounded-2xl shadow-xl backdrop-blur-md border transition-all ${
         isInside
           ? 'bg-emerald-950/90 border-emerald-500/60 text-emerald-100'
           : 'bg-amber-950/90 border-amber-500/60 text-amber-100'
       }`}
     >
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2.5 sm:gap-3">
         {isInside ? (
-          <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 shrink-0">
-            <ShieldCheck className="w-5 h-5" />
+          <div className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-emerald-500/20 text-emerald-400 shrink-0">
+            <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
         ) : (
-          <div className="flex items-center justify-center w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 shrink-0">
-            <Compass className="w-5 h-5" />
+          <div className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-amber-500/20 text-amber-400 shrink-0">
+            <Compass className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
         )}
 
-        <div className="flex flex-col">
-          <span className="font-bold text-sm tracking-wide">
+        <div className="flex flex-col min-w-0">
+          <span className="font-bold text-xs sm:text-sm tracking-wide leading-snug">
             {isInside
               ? 'Jesteś na terenie'
               : `Jesteś poza terenem (odległość do granicy: ${distanceMeters} m)`}
