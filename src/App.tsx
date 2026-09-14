@@ -28,6 +28,13 @@ export function App() {
   const [isQrModalOpen, setIsQrModalOpen] = useState(false);
   const [isGpsModalOpen, setIsGpsModalOpen] = useState(false);
 
+  // URL Test Mode (?test=true)
+  const [isTestMode, setIsTestMode] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    const params = new URLSearchParams(window.location.search);
+    return params.get('test') === 'true';
+  });
+
   // GPS Tracking Hook
   const {
     position,
@@ -37,15 +44,23 @@ export function App() {
     isMock,
   } = useGeolocation();
 
+  // Reset mock position if test mode is deactivated
+  useEffect(() => {
+    if (!isTestMode && isMock) {
+      setMockPosition(null);
+    }
+  }, [isTestMode, isMock, setMockPosition]);
+
   // Route State
   const [routeInfo, setRouteInfo] = useState<RouteInfo | null>(null);
 
-  // Sync URL query param `?id=`
+  // Sync URL query params `?id=` and `?test=`
   useEffect(() => {
     const handleUrlChange = () => {
       const params = new URLSearchParams(window.location.search);
       const id = params.get('id');
       setActiveTerritoryId(id);
+      setIsTestMode(params.get('test') === 'true');
     };
 
     // Initial check
@@ -65,6 +80,7 @@ export function App() {
       url.searchParams.delete('id');
     }
     window.history.pushState({}, '', url.toString());
+    setIsTestMode(url.searchParams.get('test') === 'true');
   }, []);
 
   // Load territories on start
@@ -220,7 +236,10 @@ export function App() {
 
         {/* Invalid ID Alert Banner - placed top-left under header, never obscuring right-side map controls */}
         {isInvalidIdSpecified && (
-          <div className="absolute top-3 left-3 max-w-[calc(100%-5.5rem)] sm:max-w-md z-[450] bg-rose-950/95 border border-rose-800 rounded-2xl p-4 shadow-2xl backdrop-blur-md">
+          <div
+            data-top-alert
+            className="absolute top-3 left-3 max-w-[calc(100%-5.5rem)] sm:max-w-md z-[450] bg-rose-950/95 border border-rose-800 rounded-2xl p-4 shadow-2xl backdrop-blur-md"
+          >
             <div className="flex items-start gap-3">
               <AlertTriangle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
               <div>
@@ -249,15 +268,18 @@ export function App() {
 
         {/* Bottom Floating Control Panel (Field View) */}
         {currentTerritory && (
-          <div className="absolute bottom-4 left-3 right-3 sm:left-6 sm:right-auto sm:w-96 z-[450] space-y-2.5 pointer-events-auto">
+          <div
+            data-field-panel
+            className="absolute bottom-4 left-3 right-3 sm:left-6 sm:right-auto sm:w-96 z-[450] space-y-2.5 pointer-events-auto max-h-[calc(100dvh-5rem)] overflow-y-auto"
+          >
             {/* Strict Status Badge */}
             <StatusBadge
               distanceResult={distanceResult}
               gpsStatus={gpsStatus}
               gpsAccuracy={position?.accuracy}
-              isMock={isMock}
+              isMock={isTestMode && isMock}
               onRequestGps={requestPermission}
-              onOpenGpsSimModal={() => setIsGpsModalOpen(true)}
+              onOpenGpsSimModal={isTestMode ? () => setIsGpsModalOpen(true) : undefined}
             />
 
             {/* Navigation & Google Maps panel */}
@@ -271,7 +293,10 @@ export function App() {
 
         {/* Landing Page Quick Action (When no territory is active) */}
         {!currentTerritory && !isInvalidIdSpecified && collection && (
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[450] w-[90%] max-w-sm">
+          <div
+            data-field-panel
+            className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[450] w-[90%] max-w-sm"
+          >
             <button
               onClick={() => setIsTerritoryDrawerOpen(true)}
               className="w-full py-3.5 px-5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-2xl shadow-2xl flex items-center justify-center gap-3 border border-blue-400/30 transition active:scale-98 text-sm md:text-base cursor-pointer"
@@ -301,14 +326,16 @@ export function App() {
         isCustomLoaded={isCustomLoaded}
       />
 
-      {/* GPS Simulation Tool Modal */}
-      <GpsSimulationModal
-        isOpen={isGpsModalOpen}
-        onClose={() => setIsGpsModalOpen(false)}
-        currentTerritory={currentTerritory}
-        onSetGps={setMockPosition}
-        isMock={isMock}
-      />
+      {/* GPS Simulation Tool Modal (Enabled strictly when test=true in URL) */}
+      {isTestMode && (
+        <GpsSimulationModal
+          isOpen={isGpsModalOpen}
+          onClose={() => setIsGpsModalOpen(false)}
+          currentTerritory={currentTerritory}
+          onSetGps={setMockPosition}
+          isMock={isMock}
+        />
+      )}
     </div>
   );
 }

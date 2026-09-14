@@ -162,7 +162,7 @@ export const LeafletMap: React.FC<LeafletMapProps> = ({
             [bounds[1], bounds[0]],
             [bounds[3], bounds[2]]
           );
-          const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+          const isMobile = typeof window !== 'undefined' && (window.innerWidth < 640 || window.innerHeight < 500);
           map.fitBounds(leafletBounds, {
             paddingTopLeft: [25, 25],
             paddingBottomRight: isMobile ? [25, 300] : [50, 50],
@@ -361,16 +361,58 @@ export const LeafletMap: React.FC<LeafletMapProps> = ({
 
   // Recenter GPS
   const handleRecenterGps = useCallback(() => {
-    if (!mapRef.current || !userPosition) return;
-    mapRef.current.flyTo([userPosition.latitude, userPosition.longitude], 17, {
-      duration: 0.8,
-    });
-  }, [userPosition]);
+    const map = mapRef.current;
+    if (!map || !userPosition) return;
+
+    const targetZoom = Math.max(map.getZoom(), 17);
+    const isMobile = typeof window !== 'undefined' && (window.innerWidth < 640 || window.innerHeight < 500);
+
+    let deltaY = 0;
+    if (isMobile) {
+      const mapContainer = map.getContainer();
+      const mapRect = mapContainer.getBoundingClientRect();
+      const bottomPanel = document.querySelector('[data-field-panel]');
+
+      let panelTopInMap = mapRect.height;
+      if (bottomPanel) {
+        const panelRect = bottomPanel.getBoundingClientRect();
+        if (panelRect.top > 0 && panelRect.top < mapRect.bottom) {
+          panelTopInMap = panelRect.top - mapRect.top;
+        }
+      } else if (territory) {
+        // Fallback offset if bottom panel is still mounting (~310px)
+        panelTopInMap = Math.max(mapRect.height - 310, 100);
+      }
+
+      // Check for top alert banner if any
+      const topBanner = document.querySelector('[data-top-alert]');
+      let topObstruction = 0;
+      if (topBanner) {
+        const topRect = topBanner.getBoundingClientRect();
+        topObstruction = Math.max(0, topRect.bottom - mapRect.top);
+      }
+
+      const freeCenterY = (topObstruction + panelTopInMap) / 2;
+      const mapCenterY = mapRect.height / 2;
+      deltaY = mapCenterY - freeCenterY;
+    }
+
+    if (deltaY !== 0) {
+      const userPoint = map.project([userPosition.latitude, userPosition.longitude], targetZoom);
+      const centerPoint = L.point(userPoint.x, userPoint.y + deltaY);
+      const centerLatLng = map.unproject(centerPoint, targetZoom);
+      map.flyTo(centerLatLng, targetZoom, { duration: 0.8 });
+    } else {
+      map.flyTo([userPosition.latitude, userPosition.longitude], targetZoom, {
+        duration: 0.8,
+      });
+    }
+  }, [userPosition, territory]);
 
   // Recenter Territory Bounds
   const handleRecenterTerritory = useCallback(() => {
     if (!mapRef.current) return;
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+    const isMobile = typeof window !== 'undefined' && (window.innerWidth < 640 || window.innerHeight < 500);
     if (territory) {
       const bounds = getTerritoryBounds(territory);
       const leafletBounds = L.latLngBounds(
@@ -404,8 +446,8 @@ export const LeafletMap: React.FC<LeafletMapProps> = ({
       {/* Map Container */}
       <div ref={mapContainerRef} className="w-full h-full z-0" />
 
-      {/* Floating Map Controls (Right Side) */}
-      <div className="absolute right-3.5 top-20 z-[400] flex flex-col space-y-2.5">
+      {/* Floating Map Controls (Right Side) - placed at top-3.5 to prevent overlapping bottom panel on small/landscape mobile screens */}
+      <div className="absolute right-3.5 top-3.5 z-[400] flex flex-col space-y-2.5">
         {/* Layer 1-Click Toggle */}
         <button
           onClick={onToggleLayer}

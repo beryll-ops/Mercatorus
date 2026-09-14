@@ -147,7 +147,7 @@ async function runTests() {
     };
 
     console.log('\n--- TEST 5: LOGIKA STATUSU GPS (INSIDE vs OUTSIDE vs DENIED) ---');
-    await page.goto('http://localhost:3000/?id=1', { waitUntil: 'networkidle0' });
+    await page.goto('http://localhost:3000/?id=1&test=true', { waitUntil: 'networkidle0' });
     await new Promise((r) => setTimeout(r, 1000));
 
     // Open GPS Simulation modal
