@@ -24,27 +24,37 @@ export async function loadTerritories(): Promise<{
     }
   }
 
-  // Load from static file (handling any Vite base URL)
-  try {
-    const metaEnv = (import.meta as unknown as { env?: { BASE_URL?: string } })?.env;
-    const basePath = metaEnv?.BASE_URL || '/';
-    const jsonUrl = `${basePath.endsWith('/') ? basePath : basePath + '/'}data/territories.geojson`;
-    const res = await fetch(jsonUrl);
-    if (!res.ok) {
-      throw new Error(`HTTP error ${res.status}`);
+  // Load from static file (handling any Vite base URL with resilient fallbacks)
+  const base = import.meta.env.BASE_URL || '/';
+  const primaryUrl = `${base.endsWith('/') ? base : base + '/'}data/territories.geojson`;
+  const candidateUrls: string[] = [
+    primaryUrl,
+    './data/territories.geojson',
+    'data/territories.geojson',
+  ];
+
+  for (const url of candidateUrls) {
+    try {
+      const res = await fetch(url);
+      if (res.ok) {
+        const data = (await res.json()) as TerritoryCollection;
+        if (data && Array.isArray(data.features) && data.features.length > 0) {
+          return { collection: data, isCustom: false };
+        }
+      }
+    } catch {
+      // Try next candidate URL
     }
-    const data = (await res.json()) as TerritoryCollection;
-    return { collection: data, isCustom: false };
-  } catch (err) {
-    console.error('Failed to load default territories.geojson', err);
-    return {
-      collection: {
-        type: 'FeatureCollection',
-        features: [],
-      },
-      isCustom: false,
-    };
   }
+
+  console.error('Failed to load default territories.geojson from candidate URLs:', candidateUrls);
+  return {
+    collection: {
+      type: 'FeatureCollection',
+      features: [],
+    },
+    isCustom: false,
+  };
 }
 
 /**
