@@ -1,13 +1,13 @@
 import React from 'react';
 import type { TerritoryFeature, GPSStatus, MapLayerType } from '../types';
-import { QrCode, Layers, Radio, MapPin, ListFilter } from 'lucide-react';
+import { ArrowLeft, QrCode, Layers, Radio, MapPin, ListFilter } from 'lucide-react';
 
 interface HeaderProps {
   currentTerritory: TerritoryFeature | null;
   gpsStatus: GPSStatus;
   activeLayer: MapLayerType;
   onToggleLayer: () => void;
-  onBackToLanding?: () => void;
+  onBackToLanding: () => void;
   onOpenTerritoryDrawer: () => void;
   onOpenQrGenerator: () => void;
   isInvalidIdSpecified?: boolean;
@@ -18,23 +18,36 @@ export const Header: React.FC<HeaderProps> = ({
   gpsStatus,
   activeLayer,
   onToggleLayer,
+  onBackToLanding,
   onOpenTerritoryDrawer,
   onOpenQrGenerator,
   isInvalidIdSpecified,
 }) => {
   return (
     <header className="relative z-[500] h-16 shrink-0 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 px-3 md:px-5 flex items-center justify-between shadow-md">
-      {/* Left side: Brand Logo */}
+      {/* Left side: Back button or Logo */}
       <div className="flex items-center gap-2.5 min-w-0">
-        <div className="flex items-center gap-2">
-          <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-blue-600/20 border border-blue-500/30 text-blue-400 shrink-0">
-            <MapPin className="w-5 h-5" />
+        {currentTerritory || isInvalidIdSpecified ? (
+          <button
+            onClick={onBackToLanding}
+            className="flex items-center justify-center gap-1.5 min-w-[44px] min-h-[44px] px-3 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 transition active:scale-95 cursor-pointer"
+            title="Wróć do listy wszystkich terenów"
+            aria-label="Wróć do listy wszystkich terenów"
+          >
+            <ArrowLeft className="w-5 h-5 text-slate-300" />
+            <span className="hidden sm:inline text-xs font-semibold">Wszystkie</span>
+          </button>
+        ) : (
+          <div className="flex items-center gap-2">
+            <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-blue-600/20 border border-blue-500/30 text-blue-400">
+              <MapPin className="w-5 h-5" />
+            </div>
+            <div className="hidden xs:flex flex-col">
+              <span className="font-extrabold text-sm tracking-wide text-white">MERCATORUS</span>
+              <span className="text-[10px] text-slate-400 leading-none">System Terenów</span>
+            </div>
           </div>
-          <div className="hidden xs:flex flex-col">
-            <span className="font-extrabold text-sm tracking-wide text-white">MERCATORUS</span>
-            <span className="text-[10px] text-slate-400 leading-none">System Terenów</span>
-          </div>
-        </div>
+        )}
 
         {/* Center/Title Info */}
         <div className="flex flex-col truncate pl-1">

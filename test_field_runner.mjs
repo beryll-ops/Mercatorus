@@ -95,14 +95,14 @@ async function runTests() {
     console.log('Polygons rendered in single view (?id=1):', singlePolygonCount);
 
     const backButtonExists = await page.$('header button[aria-label*="Wróć"]');
-    console.log('Back button exists in territory view (should be false):', !!backButtonExists);
+    console.log('Back button exists:', !!backButtonExists);
 
     testResults.scenarios.singleTerritory = {
       url: page.url(),
       headerTitle: singleHeaderTitle,
       singlePolygonCount,
       strictlyOnlyOnePolygon: singlePolygonCount === 1,
-      backButtonRemoved: !backButtonExists,
+      backButtonExists: !!backButtonExists,
     };
 
     console.log('\n--- TEST 4: BŁĘDNY PARAMETR URL (?id=nieistniejacy_teren) ---');
