@@ -51,16 +51,11 @@ async function runTests() {
       : null;
     console.log('Landing bottom button text:', landingButtonText);
 
-    // Check layer indicator pill
-    const layerIndicatorText = await page.$eval('main span.rounded-lg', (el) => el.textContent?.trim());
-    console.log('Layer indicator text:', layerIndicatorText);
-
     testResults.scenarios.landingView = {
       headerTitle,
       polygonPathsCount,
       landingButtonText,
-      layerIndicatorText,
-      success: polygonPathsCount >= 4 && landingButtonText?.includes('Wybierz teren do pracy'),
+      success: polygonPathsCount >= 4 && landingButtonText?.includes('Wybierz teren do pracy') && headerTitle === 'Mapy',
     };
 
     console.log('\n--- TEST 2: TEST WYBORU TERENU Z LISTY (DRAWER) ---');
@@ -248,15 +243,10 @@ async function runTests() {
     const satTileUrl = await page.$eval('.leaflet-tile-pane img', (el) => el.src).catch(() => 'no-tile');
     console.log('Satellite tile sample URL:', satTileUrl);
 
-    const satIndicator = await page.$eval('main span.rounded-lg', (el) => el.textContent?.trim());
-    console.log('Layer indicator text after toggle:', satIndicator);
-
     testResults.scenarios.layerToggle = {
       initialTileUrl,
       satTileUrl,
-      satIndicator,
       switchedToArcGIS: satTileUrl.includes('arcgisonline.com'),
-      indicatorUpdated: satIndicator?.includes('Esri Satelita'),
     };
 
     console.log('\n--- TEST 7: ERGONOMIA DOTYKOWA & ROZMIARY PRZYCISKÓW (MIN. 44px) ---');

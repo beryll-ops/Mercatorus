@@ -77,7 +77,7 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           ) : (
             <div className="flex items-center gap-2">
-              <h1 className="text-sm md:text-base font-bold text-white">Mapa Wszystkich Terenów</h1>
+              <h1 className="text-sm md:text-base font-bold text-white">Mapy</h1>
               <button
                 onClick={onOpenTerritoryDrawer}
                 className="flex items-center justify-center gap-1.5 min-w-[44px] min-h-[44px] px-3.5 rounded-xl bg-blue-600/30 text-blue-300 border border-blue-500/30 text-xs font-semibold hover:bg-blue-600/40 transition cursor-pointer active:scale-95"

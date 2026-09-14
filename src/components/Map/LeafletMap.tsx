@@ -404,15 +404,6 @@ export const LeafletMap: React.FC<LeafletMapProps> = ({
       {/* Map Container */}
       <div ref={mapContainerRef} className="w-full h-full z-0" />
 
-      {/* Layer indicator pill in top-left (hidden when invalid ID banner is displayed to prevent collision) */}
-      {!isInvalidIdSpecified && (
-        <div className="absolute left-3.5 top-20 z-[400] pointer-events-none">
-          <span className="px-2.5 py-1 bg-slate-900/85 backdrop-blur-md border border-slate-700/80 text-[11px] font-medium text-slate-300 rounded-lg shadow-md">
-            {activeLayer === 'streets' ? 'OpenStreetMap (ulice)' : 'Esri Satelita (orto)'}
-          </span>
-        </div>
-      )}
-
       {/* Floating Map Controls (Right Side) */}
       <div className="absolute right-3.5 top-20 z-[400] flex flex-col space-y-2.5">
         {/* Layer 1-Click Toggle */}
