@@ -25,6 +25,7 @@ interface QRGeneratorModalProps {
 interface GeneratedCard {
   id: string;
   name: string;
+  displayName: string;
   number?: string;
   city?: string;
   description?: string;
@@ -49,14 +50,18 @@ export const QRGeneratorModal: React.FC<QRGeneratorModalProps> = ({
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Group cards into pages of 4 for clean, predictable A4 print pagination
+  type LayoutDensity = 'grid-4x6' | 'grid-3x6' | 'grid-5x6';
+  const [layoutDensity, setLayoutDensity] = useState<LayoutDensity>('grid-4x6');
+
+  // Group cards into pages for clean, predictable A4 print pagination
   const cardPages = useMemo(() => {
     const pages: GeneratedCard[][] = [];
-    for (let i = 0; i < cards.length; i += 4) {
-      pages.push(cards.slice(i, i + 4));
+    const pageSize = layoutDensity === 'grid-4x6' ? 24 : layoutDensity === 'grid-3x6' ? 18 : 30;
+    for (let i = 0; i < cards.length; i += pageSize) {
+      pages.push(cards.slice(i, i + pageSize));
     }
     return pages;
-  }, [cards]);
+  }, [cards, layoutDensity]);
 
   // Generate QR codes for all territories
   useEffect(() => {
@@ -70,12 +75,21 @@ export const QRGeneratorModal: React.FC<QRGeneratorModalProps> = ({
       const results: GeneratedCard[] = [];
 
       for (const t of territories) {
-        const id = t.properties.id;
+        const id = String(t.properties.id ?? t.id ?? '').trim();
         const targetUrl = `${baseUrl}?id=${encodeURIComponent(id)}`;
+        const rawName = String(t.properties.name || '').trim();
+        const rawNum = String(t.properties.number || id).trim();
+
+        // Territory name: ensure number is included if not already present
+        const displayName = rawName.startsWith(rawNum)
+          ? rawName
+          : rawNum && rawNum !== rawName
+          ? `${rawNum} ${rawName}`
+          : rawName || `Teren ${id}`;
 
         try {
           const qrDataUrl = await QRCode.toDataURL(targetUrl, {
-            width: 320,
+            width: 360,
             margin: 1,
             color: {
               dark: '#0f172a',
@@ -85,8 +99,9 @@ export const QRGeneratorModal: React.FC<QRGeneratorModalProps> = ({
 
           results.push({
             id,
-            name: t.properties.name,
-            number: t.properties.number || id,
+            name: rawName,
+            displayName,
+            number: rawNum,
             city: t.properties.city,
             description: t.properties.description,
             qrDataUrl,
@@ -266,15 +281,56 @@ export const QRGeneratorModal: React.FC<QRGeneratorModalProps> = ({
             </div>
           )}
 
-          {/* Secondary Actions */}
+          {/* Secondary Actions & Density Toggle */}
           <div className="flex flex-wrap items-center justify-between gap-3 text-xs">
-            <div className="flex items-center gap-2 text-slate-400">
+            <div className="flex flex-wrap items-center gap-2 text-slate-400">
               <span>Tereny w pamięci: <strong className="text-slate-200">{territories.length}</strong></span>
               {isCustomLoaded && (
                 <span className="px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-mono text-[10px]">
                   Własne z pliku
                 </span>
               )}
+            </div>
+
+            {/* Layout Density Selector */}
+            <div className="flex items-center gap-1 bg-slate-800/90 p-1 rounded-xl border border-slate-700">
+              <span className="text-[11px] text-slate-400 px-2 font-medium">Układ:</span>
+              <button
+                type="button"
+                onClick={() => setLayoutDensity('grid-4x6')}
+                className={`min-h-[36px] px-2.5 py-1 rounded-lg text-xs font-semibold transition cursor-pointer ${
+                  layoutDensity === 'grid-4x6'
+                    ? 'bg-blue-600 text-white shadow'
+                    : 'text-slate-300 hover:text-white hover:bg-slate-700/60'
+                }`}
+                title="24 kody na arkuszu A4 (4 kolumny, kod 3x3 cm)"
+              >
+                4 kolumny (24 na A4)
+              </button>
+              <button
+                type="button"
+                onClick={() => setLayoutDensity('grid-3x6')}
+                className={`min-h-[36px] px-2.5 py-1 rounded-lg text-xs font-semibold transition cursor-pointer ${
+                  layoutDensity === 'grid-3x6'
+                    ? 'bg-blue-600 text-white shadow'
+                    : 'text-slate-300 hover:text-white hover:bg-slate-700/60'
+                }`}
+                title="18 kodów na arkuszu A4 (3 kolumny, kod 3x3 cm)"
+              >
+                3 kolumny (18 na A4)
+              </button>
+              <button
+                type="button"
+                onClick={() => setLayoutDensity('grid-5x6')}
+                className={`min-h-[36px] px-2.5 py-1 rounded-lg text-xs font-semibold transition cursor-pointer ${
+                  layoutDensity === 'grid-5x6'
+                    ? 'bg-blue-600 text-white shadow'
+                    : 'text-slate-300 hover:text-white hover:bg-slate-700/60'
+                }`}
+                title="30 kodów na arkuszu A4 (5 kolumn, kod 3x3 cm)"
+              >
+                5 kolumn (30 na A4)
+              </button>
             </div>
 
             <div className="flex items-center gap-2">
@@ -304,59 +360,46 @@ export const QRGeneratorModal: React.FC<QRGeneratorModalProps> = ({
         <div className="overflow-y-auto p-4 sm:p-6 bg-slate-950 print:bg-white print:p-0 print:overflow-visible flex-1">
           {isGenerating ? (
             <div className="py-16 text-center text-slate-400 text-sm">
-              Generowanie kodów QR i szablonów kart...
+              Generowanie kodów QR...
             </div>
           ) : (
             <div className="space-y-6 print:space-y-0">
               {cardPages.map((pageCards, pageIndex) => (
                 <div key={pageIndex} className="qr-print-page">
-                  <div className="printable-cards-grid grid grid-cols-1 md:grid-cols-2 gap-4 print:grid-cols-2 print:gap-3">
+                  <div
+                    className={`printable-cards-grid grid gap-3.5 print:gap-2.5 ${
+                      layoutDensity === 'grid-4x6'
+                        ? 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 density-4x6'
+                        : layoutDensity === 'grid-3x6'
+                        ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 density-3x6'
+                        : 'grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 density-5x6'
+                    }`}
+                  >
                     {pageCards.map((card) => (
                       <div
                         key={card.id}
-                        className="qr-print-card bg-white text-slate-900 border-2 border-dashed border-slate-300 rounded-xl p-4 flex flex-col items-center justify-between shadow-sm relative break-inside-avoid print:border-slate-400 print:shadow-none print:m-0"
-                        style={{ minHeight: '320px' }}
+                        className="qr-print-card bg-white text-slate-900 p-2 rounded-lg flex flex-col items-center justify-center break-inside-avoid shadow-sm print:shadow-none print:p-1 print:m-0 print:border-none"
                       >
-                        {/* Top card header */}
-                        <div className="w-full text-center border-b pb-2 mb-2 border-slate-200">
-                          <div className="flex items-center justify-between px-1">
-                            <span className="text-[10px] uppercase font-bold tracking-widest text-slate-600">
-                              KARTA TERENU
-                            </span>
-                            <span className="text-xs font-black px-2 py-0.5 rounded bg-slate-100 text-slate-800 border border-slate-200">
-                              NR {card.number}
-                            </span>
-                          </div>
-                          <h3 className="font-extrabold text-base text-slate-900 mt-1 leading-tight">
-                            {card.name}
-                          </h3>
-                          {card.city && (
-                            <p className="text-xs font-medium text-slate-700 mt-0.5">{card.city}</p>
-                          )}
-                        </div>
+                        {/* Territory Name Header ONLY */}
+                        <h3 className="font-bold text-xs sm:text-sm text-slate-900 text-center leading-tight mb-1.5 px-0.5 line-clamp-2">
+                          {card.displayName}
+                        </h3>
 
-                        {/* QR Code */}
-                        <div className="p-2 bg-white rounded-lg shadow-inner border border-slate-100 my-1">
+                        {/* Strictly 3x3 cm QR Code image */}
+                        <div className="flex items-center justify-center p-0.5 bg-white">
                           <img
                             src={card.qrDataUrl}
-                            alt={`Kod QR dla ${card.name}`}
-                            className="w-40 h-40 object-contain print:w-32 print:h-32"
+                            alt={`Kod QR dla ${card.displayName}`}
+                            className="qr-code-img object-contain print:w-[3cm] print:h-[3cm]"
+                            style={{
+                              width: '3cm',
+                              height: '3cm',
+                              minWidth: '3cm',
+                              minHeight: '3cm',
+                              maxWidth: '3cm',
+                              maxHeight: '3cm',
+                            }}
                           />
-                        </div>
-
-                        {/* Instructions and URL */}
-                        <div className="w-full text-center mt-2 pt-2 border-t border-slate-200">
-                          <p className="text-[11px] font-semibold text-slate-800 leading-snug">
-                            Zeskanuj aparat telefonu, aby otworzyć interaktywną mapę z GPS
-                          </p>
-                          <p className="text-[9px] font-mono text-slate-600 mt-1 break-all select-all">
-                            {card.fullUrl}
-                          </p>
-                        </div>
-
-                        {/* Scissors cut hint */}
-                        <div className="absolute -top-3 right-4 bg-white px-1 text-[9px] text-slate-500 font-mono print:block hidden">
-                          ✂ linia cięcia
                         </div>
                       </div>
                     ))}

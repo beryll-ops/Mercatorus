@@ -92,30 +92,81 @@
     break-after: auto !important;
   }
 
-  .printable-cards-grid {
+  /* 4-column Grid (Default: 24 QR codes per A4 page) */
+  .printable-cards-grid,
+  .printable-cards-grid.density-4x6 {
     display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    grid-auto-rows: minmax(38mm, auto) !important;
+    align-content: start !important;
+    gap: 3mm !important;
+    width: 100% !important;
+    max-height: 255mm !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 3-column Grid (18 QR codes per A4 page) */
+  .printable-cards-grid.density-3x6 {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    grid-auto-rows: minmax(38mm, auto) !important;
+    align-content: start !important;
     gap: 4mm !important;
     width: 100% !important;
-    height: 260mm !important;
-    max-height: 260mm !important;
+    max-height: 255mm !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 5-column Grid (30 QR codes per A4 page) */
+  .printable-cards-grid.density-5x6 {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    grid-auto-rows: minmax(38mm, auto) !important;
+    align-content: start !important;
+    gap: 2mm !important;
+    width: 100% !important;
+    max-height: 255mm !important;
     box-sizing: border-box !important;
   }
 
   .qr-print-card {
     page-break-inside: avoid !important;
     break-inside: avoid !important;
-    border: 1.5px dashed #475569 !important;
+    border: none !important;
     box-shadow: none !important;
     background: white !important;
     color: black !important;
-    padding: 3mm !important;
-    height: 100% !important;
+    padding: 1.5mm !important;
+    height: auto !important;
     min-height: 0 !important;
     box-sizing: border-box !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: space-between !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
+
+  /* Strictly enforce 3x3 cm (30mm x 30mm) physical print size for QR code images */
+  .qr-code-img {
+    width: 3cm !important;
+    height: 3cm !important;
+    min-width: 3cm !important;
+    min-height: 3cm !important;
+    max-width: 3cm !important;
+    max-height: 3cm !important;
+    object-fit: contain !important;
+    display: block !important;
+    margin: 0 auto !important;
+  }
+}
+
+/* Screen styles for 3x3 cm QR code image */
+.qr-code-img {
+  width: 3cm;
+  height: 3cm;
+  min-width: 3cm;
+  min-height: 3cm;
+  max-width: 3cm;
+  max-height: 3cm;
+  object-fit: contain;
 }
