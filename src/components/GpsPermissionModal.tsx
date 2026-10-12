@@ -79,7 +79,7 @@ export const GpsPermissionModal: React.FC<GpsPermissionModalProps> = ({
                 <span>Odblokuj w pasku adresu URL</span>
               </h4>
               <p className="text-[11px] text-slate-400 leading-relaxed">
-                Dotknij <strong>kłódki / suwaków (🔒/⚙)</strong> obok adresu strony na samej górze ekranu $\rightarrow$ <strong>Uprawnienia</strong> $\rightarrow$ <strong>Lokalizacja: Zezwalaj</strong>.
+                Dotknij <strong>kłódki / suwaków (🔒/⚙)</strong> obok adresu strony na samej górze ekranu → <strong>Uprawnienia</strong> → <strong>Lokalizacja: Zezwalaj</strong>.
               </p>
             </div>
           </div>
