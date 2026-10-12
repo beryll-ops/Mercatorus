@@ -60,6 +60,9 @@ export function App() {
       const params = new URLSearchParams(window.location.search);
       const id = params.get('id');
       setActiveTerritoryId(id);
+      if (id) {
+        setIsQrModalOpen(false);
+      }
       setIsTestMode(params.get('test') === 'true');
     };
 
@@ -73,6 +76,9 @@ export function App() {
   // Set territory and update URL without full page reload
   const handleSelectTerritory = useCallback((id: string | null) => {
     setActiveTerritoryId(id);
+    if (id) {
+      setIsQrModalOpen(false);
+    }
     const url = new URL(window.location.href);
     if (id) {
       url.searchParams.set('id', id);
@@ -331,9 +337,9 @@ export function App() {
         onSelect={(id) => handleSelectTerritory(id)}
       />
 
-      {/* QR Generator & KML Importer Modal */}
+      {/* QR Generator & KML Importer Modal - strictly only on landing page */}
       <QRGeneratorModal
-        isOpen={isQrModalOpen}
+        isOpen={isQrModalOpen && !currentTerritory && !isInvalidIdSpecified}
         onClose={() => setIsQrModalOpen(false)}
         territories={collection?.features || []}
         onImportSuccess={handleImportSuccess}

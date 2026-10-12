@@ -29,28 +29,24 @@ function normalizeKmlColor(color) {
 }
 
 /**
- * Extracts canonical territory ID from name or properties
+ * Extracts canonical territory ID from name or properties.
+ * Returns { id: string, isExplicit: boolean } so unnumbered territories are never accidentally merged.
  */
 function extractCanonicalId(rawName, props, index) {
   // Check explicit property
   const explicit = props.id || props.number || props.numer || props.kod;
   if (explicit && String(explicit).trim()) {
-    return String(explicit).trim().toUpperCase();
+    return { id: String(explicit).trim().toUpperCase(), isExplicit: true };
   }
 
-  // Look for leading territory number like "88-1", "12A", "NR 5", "Teren 119/1"
+  // Look for leading territory number like "88-1", "12A", "NR 5", "Teren 119/1", "7 Sokoła"
   const prefixMatch = rawName.match(/^(?:nr\.?|no\.?|teren|obszar)?\s*([0-9]+(?:[-_/][0-9a-zA-Z]+|[a-zA-Z])?)\b/i);
   if (prefixMatch && prefixMatch[1]) {
-    return prefixMatch[1].replace(/[/_]/g, '-').toUpperCase();
+    return { id: prefixMatch[1].replace(/[/_]/g, '-').toUpperCase(), isExplicit: true };
   }
 
-  // Fallback to any standalone number or sub-territory code in string
-  const generalMatch = rawName.match(/\b([0-9]+(?:[-_/][0-9a-zA-Z]+|[a-zA-Z])?)\b/);
-  if (generalMatch && generalMatch[1]) {
-    return generalMatch[1].replace(/[/_]/g, '-').toUpperCase();
-  }
-
-  return String(index);
+  // Fallback: unnumbered territory using order index
+  return { id: String(index), isExplicit: false };
 }
 
 /**
@@ -169,12 +165,14 @@ async function syncGoogleMap() {
 
   const parsedFeatures = [];
   const usedIds = new Set();
+  const claimedExisting = new Set();
   let lockedByIdCount = 0;
   let lockedByGeometryCount = 0;
   let newTerritoriesCount = 0;
 
-  let idx = 1;
+  let idx = 0;
   for (const rawFeat of rawGeoJson.features) {
+    idx++;
     if (!rawFeat.geometry) continue;
 
     let geometry = rawFeat.geometry;
@@ -211,7 +209,7 @@ async function syncGoogleMap() {
       continue;
     }
 
-    const candidateId = extractCanonicalId(rawName, props, idx);
+    const candidate = extractCanonicalId(rawName, props, idx);
 
     let centroid = null;
     try {
@@ -220,37 +218,39 @@ async function syncGoogleMap() {
       // ignore
     }
 
-    // 1. Try matching with existing territory by ID or alias
+    // 1. Try matching with existing territory by ID or alias (only unclaimed ones)
     let matchedExisting = existingLookup.find(
-      (e) => e.id === candidateId || e.number === candidateId || e.aliases.includes(candidateId)
+      (e) => !claimedExisting.has(e.id) && (e.id === candidate.id || e.number === candidate.id || e.aliases.includes(candidate.id))
     );
 
-    let finalId = candidateId;
+    let finalId = candidate.id;
     let accumulatedAliases = [];
 
     if (matchedExisting) {
       finalId = matchedExisting.id;
       accumulatedAliases = [...matchedExisting.aliases];
-      if (candidateId !== finalId && !accumulatedAliases.includes(candidateId)) {
-        accumulatedAliases.push(candidateId);
+      if (candidate.id !== finalId && !accumulatedAliases.includes(candidate.id)) {
+        accumulatedAliases.push(candidate.id);
       }
+      claimedExisting.add(finalId);
       lockedByIdCount++;
     } else if (centroid) {
-      // 2. Geometric match: check if a territory closely overlaps an existing one
-      // (prevents ID loss if coordinator renamed the territory in Google My Maps without number)
+      // 2. Geometric match: check if territory closely overlaps an unclaimed existing one
       const geoMatch = existingLookup.find((e) => {
+        if (claimedExisting.has(e.id)) return false;
         if (!e.centroid) return false;
         const distMeters = turf.distance(centroid, e.centroid, { units: 'meters' });
-        return distMeters < 75; // centroid within 75m
+        return distMeters < 50; // centroid within 50m
       });
 
       if (geoMatch) {
         console.log(`[GEOMETRIC LOCK] Teren "${rawName}" dopasowano geometrycznie do istniejącego ID "${geoMatch.id}" (${geoMatch.name})`);
         finalId = geoMatch.id;
         accumulatedAliases = [...geoMatch.aliases];
-        if (candidateId !== finalId && !accumulatedAliases.includes(candidateId)) {
-          accumulatedAliases.push(candidateId);
+        if (candidate.id !== finalId && !accumulatedAliases.includes(candidate.id)) {
+          accumulatedAliases.push(candidate.id);
         }
+        claimedExisting.add(finalId);
         lockedByGeometryCount++;
       } else {
         newTerritoriesCount++;
@@ -259,24 +259,30 @@ async function syncGoogleMap() {
       newTerritoriesCount++;
     }
 
-    // MultiPolygon Auto-Merge: If a territory with this finalId already exists,
-    // merge the polygon rings instead of creating a conflicting duplicate feature!
-    const existingWithSameId = parsedFeatures.find((f) => f.id === finalId);
-    if (existingWithSameId) {
-      console.log(`[MULTIPOLYGON MERGE] Łączenie części wieloczęściowego terenu "${finalId}" (${rawName}) w MultiPolygon`);
-      if (existingWithSameId.geometry.type === 'Polygon') {
-        existingWithSameId.geometry = {
+    // MultiPolygon Auto-Merge:
+    // Strictly merge ONLY if both placemarks share the EXACT SAME territory name or explicit number
+    // (e.g. user drew two parts and named both "7 Sokoła" in Google My Maps)
+    const existingWithSameName = parsedFeatures.find((f) => {
+      const fName = String(f.properties?.name || '').trim().toLowerCase();
+      const currentName = rawName.trim().toLowerCase();
+      return (fName === currentName && currentName !== '') || (candidate.isExplicit && f.properties?.number === candidate.id && f.id === finalId);
+    });
+
+    if (existingWithSameName) {
+      console.log(`[MULTIPOLYGON MERGE] Łączenie części wieloczęściowego terenu "${existingWithSameName.id}" (${rawName}) w MultiPolygon`);
+      if (existingWithSameName.geometry.type === 'Polygon') {
+        existingWithSameName.geometry = {
           type: 'MultiPolygon',
           coordinates: [
-            existingWithSameId.geometry.coordinates,
+            existingWithSameName.geometry.coordinates,
             geometry.type === 'Polygon' ? geometry.coordinates : geometry.coordinates[0],
           ],
         };
-      } else if (existingWithSameId.geometry.type === 'MultiPolygon') {
+      } else if (existingWithSameName.geometry.type === 'MultiPolygon') {
         if (geometry.type === 'Polygon') {
-          existingWithSameId.geometry.coordinates.push(geometry.coordinates);
+          existingWithSameName.geometry.coordinates.push(geometry.coordinates);
         } else {
-          existingWithSameId.geometry.coordinates.push(...geometry.coordinates);
+          existingWithSameName.geometry.coordinates.push(...geometry.coordinates);
         }
       }
       continue;
@@ -298,7 +304,7 @@ async function syncGoogleMap() {
       properties: {
         id: finalId,
         name: rawName,
-        number: candidateId,
+        number: candidate.id,
         description: props.description ? String(props.description).trim() : undefined,
         color,
         aliases: accumulatedAliases.length > 0 ? Array.from(new Set(accumulatedAliases)) : undefined,
@@ -307,7 +313,6 @@ async function syncGoogleMap() {
     };
 
     parsedFeatures.push(territory);
-    idx++;
   }
 
   if (parsedFeatures.length === 0) {

@@ -122,15 +122,17 @@ export const Header: React.FC<HeaderProps> = ({
           <span>{activeLayer === 'streets' ? 'Satelita' : 'Ulice'}</span>
         </button>
 
-        {/* QR & KML Generator Button */}
-        <button
-          onClick={onOpenQrGenerator}
-          className="flex items-center justify-center gap-1.5 min-w-[44px] min-h-[44px] px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold text-xs shadow-md border border-blue-400/20 transition active:scale-95 cursor-pointer"
-          title="Kreator kart QR i import KML/KMZ"
-        >
-          <QrCode className="w-4 h-4" />
-          <span className="hidden md:inline">Karty QR / Import</span>
-        </button>
+        {/* QR & KML Generator Button - visible strictly on the main landing page */}
+        {!currentTerritory && !isInvalidIdSpecified && (
+          <button
+            onClick={onOpenQrGenerator}
+            className="flex items-center justify-center gap-1.5 min-w-[44px] min-h-[44px] px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold text-xs shadow-md border border-blue-400/20 transition active:scale-95 cursor-pointer"
+            title="Kreator kart QR i import KML/KMZ"
+          >
+            <QrCode className="w-4 h-4" />
+            <span className="hidden md:inline">Karty QR / Import</span>
+          </button>
+        )}
       </div>
     </header>
   );
