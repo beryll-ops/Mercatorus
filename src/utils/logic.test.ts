@@ -115,6 +115,50 @@ describe('Territory Storage and Lookup', () => {
     expect(found?.properties.name).toBe('Teren 07');
   });
 
+  it('correctly distinguishes sub-territories from base numbers without false matches', () => {
+    const multiCollection: TerritoryCollection = {
+      type: 'FeatureCollection',
+      features: [
+        {
+          type: 'Feature',
+          id: '88',
+          properties: { id: '88', name: '88 Staromieście II' },
+          geometry: sampleTerritory.geometry,
+        },
+        {
+          type: 'Feature',
+          id: '88-1',
+          properties: {
+            id: '88-1',
+            name: '88-1 Staromieście II',
+            aliases: ['88-84', '88/1'],
+          },
+          geometry: sampleTerritory.geometry,
+        },
+      ],
+    };
+
+    // Querying base "88" must return base territory "88", NEVER "88-1"
+    const baseFound = findTerritoryById(multiCollection, '88');
+    expect(baseFound).toBeDefined();
+    expect(baseFound?.id).toBe('88');
+
+    // Querying "88-1" must return sub-territory "88-1", NEVER "88"
+    const subFound = findTerritoryById(multiCollection, '88-1');
+    expect(subFound).toBeDefined();
+    expect(subFound?.id).toBe('88-1');
+
+    // Querying legacy printed card ID "88-84" must find "88-1" via alias
+    const aliasFound = findTerritoryById(multiCollection, '88-84');
+    expect(aliasFound).toBeDefined();
+    expect(aliasFound?.id).toBe('88-1');
+
+    // Querying with slash "88/1" should normalize and find "88-1"
+    const slashFound = findTerritoryById(multiCollection, '88/1');
+    expect(slashFound).toBeDefined();
+    expect(slashFound?.id).toBe('88-1');
+  });
+
   it('returns undefined for non-existent ID', () => {
     const found = findTerritoryById(sampleCollection, '999');
     expect(found).toBeUndefined();
@@ -200,6 +244,50 @@ describe('KML to GeoJSON Parser', () => {
     expect(normalizeKmlColor('ff0000ff')).toBe('#ff0000');
     // Standard #rrggbb
     expect(normalizeKmlColor('#2563eb')).toBe('#2563eb');
+  });
+
+  it('parses sub-territory codes with hyphens, slashes, and letters (e.g. 88-1, 119/1, 12A)', () => {
+    const kmlWithSub = `<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <Placemark>
+      <name>88-1 Staromieście II</name>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>19.93,50.06,0 19.94,50.06,0 19.94,50.07,0 19.93,50.06,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>119/1 Trzebownisko C</name>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>19.95,50.06,0 19.96,50.06,0 19.96,50.07,0 19.95,50.06,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>NR 12A Centrum</name>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>19.97,50.06,0 19.98,50.06,0 19.98,50.07,0 19.97,50.06,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+  </Document>
+</kml>`;
+
+    const parsed = parseKmlToTerritories(kmlWithSub);
+    expect(parsed.features.length).toBe(3);
+    expect(parsed.features[0].properties.id).toBe('88-1');
+    expect(parsed.features[1].properties.id).toBe('119-1');
+    expect(parsed.features[2].properties.id).toBe('12A');
   });
 
   it('throws helpful error on malformed XML or empty polygons', () => {

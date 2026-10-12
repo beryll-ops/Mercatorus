@@ -7,6 +7,7 @@ export interface TerritoryProperties {
   description?: string;
   city?: string;
   color?: string;
+  aliases?: string[];
   [key: string]: unknown;
 }
 

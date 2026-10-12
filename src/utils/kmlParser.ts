@@ -109,15 +109,26 @@ export function parseKmlToTerritories(kmlText: string): TerritoryCollection {
     const props = feature.properties || {};
     const rawName = props.name ? String(props.name).trim() : `Teren ${idx}`;
     
-    // Extract ID: prefer existing id, or match numbers in name, or fallback to sequential idx
-    let id = String(feature.id || props.id || '').trim();
+    // Extract ID: prefer existing id/number props, then prefix pattern, then general match
+    let id = String(feature.id || props.id || props.number || props.numer || '').trim();
     if (!id) {
-      const match = rawName.match(/\d+/);
-      id = match ? match[0] : String(idx);
+      // Check for leading identifier like "88-1", "12A", "NR 5", "Teren 119/1"
+      const prefixMatch = rawName.match(/^(?:nr\.?|no\.?|teren|obszar)?\s*([0-9]+(?:[-_/][0-9a-zA-Z]+|[a-zA-Z])?)\b/i);
+      if (prefixMatch && prefixMatch[1]) {
+        id = prefixMatch[1].replace(/[/_]/g, '-').toUpperCase();
+      } else {
+        // Fallback to any standalone number or sub-territory code
+        const generalMatch = rawName.match(/\b([0-9]+(?:[-_/][0-9a-zA-Z]+|[a-zA-Z])?)\b/);
+        id = generalMatch && generalMatch[1] ? generalMatch[1].replace(/[/_]/g, '-').toUpperCase() : String(idx);
+      }
     }
 
-    // Disambiguate duplicate IDs
+    const aliases: string[] = [];
+    const baseId = id;
+
+    // Disambiguate duplicate IDs while preserving original as alias
     if (usedIds.has(id)) {
+      aliases.push(id);
       id = `${id}-${idx}`;
     }
     usedIds.add(id);
@@ -132,9 +143,10 @@ export function parseKmlToTerritories(kmlText: string): TerritoryCollection {
       properties: {
         id: id,
         name: rawName,
-        number: id,
+        number: baseId,
         description: props.description ? String(props.description).trim() : undefined,
         color,
+        aliases: aliases.length > 0 ? aliases : undefined,
       },
       geometry: geometry as TerritoryFeature['geometry'],
     };

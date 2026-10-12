@@ -1,0 +1,4 @@
+{
+  "$comment": "Wklej tutaj ID swojej mapy z Google My Maps (wartość parametru mid= w adresie URL) lub ustaw zmienną środowiskową GOOGLE_MAP_ID",
+  "googleMapId": ""
+}

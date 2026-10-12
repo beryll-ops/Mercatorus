@@ -1,0 +1,52 @@
+name: Sync Territories from Google My Maps
+
+on:
+  # Scheduled run every 6 hours
+  schedule:
+    - cron: '0 */6 * * *'
+
+  # Manual trigger with 1-click in GitHub Actions tab
+  workflow_dispatch:
+    inputs:
+      google_map_id:
+        description: 'Google My Maps ID (optional, overrides config/map-source.json or repository secret)'
+        required: false
+        default: ''
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Google My Maps Sync
+        run: node scripts/sync-google-map.mjs "${{ inputs.google_map_id }}"
+        env:
+          GOOGLE_MAP_ID: ${{ secrets.GOOGLE_MAP_ID || vars.GOOGLE_MAP_ID }}
+
+      - name: Commit and push updated GeoJSON
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain public/data/territories.geojson)" ]; then
+            git add public/data/territories.geojson
+            git commit -m "chore(data): auto-sync territories from Google My Maps"
+            git push
+            echo "Successfully updated and pushed territories.geojson to main branch."
+          else
+            echo "No territory changes detected. territories.geojson is already up to date."
+          fi
