@@ -2,6 +2,7 @@ node_modules
 dist
 dist-ssr
 *.local
+*.tsbuildinfo
 .agents/
 AGENTS.md
 GEMINI.md

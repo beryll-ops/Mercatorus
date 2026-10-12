@@ -153,22 +153,25 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
       </div>
 
       <div className="flex items-center gap-1.5 shrink-0" onClick={(e) => e.stopPropagation()}>
-        {onRequestGps && !isLoading && (
+        {onRequestGps && (
           <button
             onClick={onRequestGps}
-            className={`min-h-[36px] px-2.5 py-1 rounded-xl text-xs font-semibold whitespace-nowrap transition cursor-pointer active:scale-95 flex items-center justify-center ${
-              isDenied
+            disabled={isLoading}
+            className={`min-h-[40px] px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition cursor-pointer active:scale-95 flex items-center justify-center ${
+              isLoading
+                ? 'bg-slate-800 text-slate-300 border border-slate-700/60 cursor-wait opacity-90'
+                : isDenied
                 ? 'bg-rose-900 hover:bg-rose-800 text-white border border-rose-700/50'
                 : 'bg-amber-900 hover:bg-amber-800 text-white border border-amber-700/50'
             }`}
           >
-            {isDenied ? 'Włącz' : 'Odśwież'}
+            {isLoading ? 'Szukanie...' : isDenied ? 'Włącz' : 'Odśwież'}
           </button>
         )}
         {onOpenGpsSimModal && (
           <button
             onClick={onOpenGpsSimModal}
-            className="min-h-[36px] px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700/60 rounded-xl text-xs font-semibold whitespace-nowrap transition cursor-pointer active:scale-95 flex items-center justify-center"
+            className="min-h-[40px] px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700/60 rounded-xl text-xs font-semibold whitespace-nowrap transition cursor-pointer active:scale-95 flex items-center justify-center"
           >
             Symuluj
           </button>

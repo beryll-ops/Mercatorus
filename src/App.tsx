@@ -17,6 +17,7 @@ import { NavigationPanel } from './components/NavigationPanel';
 import { TerritorySelector } from './components/TerritorySelector';
 import { QRGeneratorModal } from './components/QRGenerator/QRGeneratorModal';
 import { GpsSimulationModal } from './components/GpsSimulationModal';
+import { GpsPermissionModal } from './components/GpsPermissionModal';
 import { AlertTriangle, List } from 'lucide-react';
 
 export function App() {
@@ -43,6 +44,9 @@ export function App() {
     requestPermission,
     setMockPosition,
     isMock,
+    permissionState,
+    isPermissionModalOpen,
+    setIsPermissionModalOpen,
   } = useGeolocation();
 
   // Reset mock position if test mode is deactivated
@@ -369,6 +373,15 @@ export function App() {
           isMock={isMock}
         />
       )}
+
+      {/* GPS Permission Guide Modal (Displays when user or browser has blocked GPS) */}
+      <GpsPermissionModal
+        isOpen={isPermissionModalOpen}
+        onClose={() => setIsPermissionModalOpen(false)}
+        onRetry={requestPermission}
+        permissionState={permissionState}
+        onOpenGpsSimModal={isTestMode ? () => setIsGpsModalOpen(true) : undefined}
+      />
     </div>
   );
 }
