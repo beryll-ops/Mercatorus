@@ -74,7 +74,9 @@ export const TerritorySelector: React.FC<TerritorySelectorProps> = ({
         <div className="overflow-y-auto p-4 space-y-2.5 divide-y divide-slate-800/40">
           {filteredTerritories.length === 0 ? (
             <div className="py-8 text-center text-slate-400 text-sm">
-              Brak terenów pasujących do frazy &quot;{searchQuery}&quot;
+              {territories.length === 0
+                ? 'Brak wgranych terenów. Zsynchronizuj mapę lub wgraj plik KML.'
+                : `Brak terenów pasujących do frazy "${searchQuery}"`}
             </div>
           ) : (
             filteredTerritories.map((t) => {

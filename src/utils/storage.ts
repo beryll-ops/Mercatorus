@@ -38,7 +38,7 @@ export async function loadTerritories(): Promise<{
       const res = await fetch(url);
       if (res.ok) {
         const data = (await res.json()) as TerritoryCollection;
-        if (data && Array.isArray(data.features) && data.features.length > 0) {
+        if (data && Array.isArray(data.features)) {
           return { collection: data, isCustom: false };
         }
       }

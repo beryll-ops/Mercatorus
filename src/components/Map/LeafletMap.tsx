@@ -186,7 +186,16 @@ export const LeafletMap: React.FC<LeafletMapProps> = ({
     }
 
     // CASE 2: No specific territory (Landing view) -> show all available territories
-    if (allTerritories && allTerritories.length > 0) {
+    if (!allTerritories || allTerritories.length === 0) {
+      if (territoryLayerRef.current) {
+        map.removeLayer(territoryLayerRef.current);
+        territoryLayerRef.current = null;
+      }
+      prevTerritoryIdRef.current = null;
+      return;
+    }
+
+    if (allTerritories.length > 0) {
       const isReturningToAll = prevTerritoryIdRef.current !== null || !initialFitDoneRef.current;
 
       if (isReturningToAll || !territoryLayerRef.current) {

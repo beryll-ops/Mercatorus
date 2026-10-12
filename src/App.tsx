@@ -297,13 +297,28 @@ export function App() {
             data-field-panel
             className="absolute bottom-5 sm:bottom-6 left-1/2 -translate-x-1/2 z-[450] w-[92%] max-w-sm pb-[env(safe-area-inset-bottom,0px)]"
           >
-            <button
-              onClick={() => setIsTerritoryDrawerOpen(true)}
-              className="w-full py-3.5 px-5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-2xl shadow-2xl flex items-center justify-center gap-3 border border-blue-400/30 transition active:scale-98 text-sm md:text-base cursor-pointer"
-            >
-              <List className="w-5 h-5" />
-              <span>Wybierz teren do pracy ({collection.features.length})</span>
-            </button>
+            {collection.features.length > 0 ? (
+              <button
+                onClick={() => setIsTerritoryDrawerOpen(true)}
+                className="w-full py-3.5 px-5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-2xl shadow-2xl flex items-center justify-center gap-3 border border-blue-400/30 transition active:scale-98 text-sm md:text-base cursor-pointer"
+              >
+                <List className="w-5 h-5" />
+                <span>Wybierz teren do pracy ({collection.features.length})</span>
+              </button>
+            ) : (
+              <div className="bg-slate-900/95 border border-slate-700/80 rounded-2xl p-4 shadow-2xl backdrop-blur-md text-center">
+                <p className="text-sm font-semibold text-slate-200">Baza terenów jest pusta</p>
+                <p className="text-xs text-slate-400 mt-1">
+                  Skonfiguruj Google My Maps lub zaimportuj plik KML w generatorze.
+                </p>
+                <button
+                  onClick={() => setIsQrModalOpen(true)}
+                  className="mt-3 w-full min-h-[44px] py-2 px-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl text-xs transition cursor-pointer active:scale-95"
+                >
+                  Zaimportuj KML / Opcje
+                </button>
+              </div>
+            )}
           </div>
         )}
       </main>
