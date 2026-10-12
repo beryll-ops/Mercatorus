@@ -27,7 +27,7 @@ export function App() {
   const [isTerritoryDrawerOpen, setIsTerritoryDrawerOpen] = useState(false);
   const [isQrModalOpen, setIsQrModalOpen] = useState(false);
   const [isGpsModalOpen, setIsGpsModalOpen] = useState(false);
-  const [isGpsWarningDismissed, setIsGpsWarningDismissed] = useState(false);
+  const [isNavigationExpanded, setIsNavigationExpanded] = useState(false);
 
   // URL Test Mode (?test=true)
   const [isTestMode, setIsTestMode] = useState(() => {
@@ -61,6 +61,7 @@ export function App() {
       const params = new URLSearchParams(window.location.search);
       const id = params.get('id');
       setActiveTerritoryId(id);
+      setIsNavigationExpanded(false);
       if (id) {
         setIsQrModalOpen(false);
       }
@@ -77,6 +78,7 @@ export function App() {
   // Set territory and update URL without full page reload
   const handleSelectTerritory = useCallback((id: string | null) => {
     setActiveTerritoryId(id);
+    setIsNavigationExpanded(false);
     if (id) {
       setIsQrModalOpen(false);
     }
@@ -225,10 +227,7 @@ export function App() {
         onBackToLanding={() => handleSelectTerritory(null)}
         onOpenTerritoryDrawer={() => setIsTerritoryDrawerOpen(true)}
         onOpenQrGenerator={() => setIsQrModalOpen(true)}
-        onRequestGps={() => {
-          setIsGpsWarningDismissed(false);
-          requestPermission();
-        }}
+        onRequestGps={requestPermission}
         isInvalidIdSpecified={isInvalidIdSpecified}
       />
 
@@ -244,6 +243,23 @@ export function App() {
           onSelectTerritory={handleSelectTerritory}
           isInvalidIdSpecified={isInvalidIdSpecified}
         />
+
+        {/* Top Status Banner (Field View - inside/outside distance & GPS status) */}
+        {currentTerritory && (
+          <div
+            data-top-status
+            className="absolute top-2.5 left-2.5 right-20 sm:left-4 sm:right-auto sm:max-w-md z-[450] pointer-events-auto"
+          >
+            <StatusBadge
+              distanceResult={distanceResult}
+              gpsStatus={gpsStatus}
+              gpsAccuracy={position?.accuracy}
+              isMock={isTestMode && isMock}
+              onRequestGps={requestPermission}
+              onOpenGpsSimModal={isTestMode ? () => setIsGpsModalOpen(true) : undefined}
+            />
+          </div>
+        )}
 
         {/* Invalid ID Alert Banner - placed top-left under header, never obscuring right-side map controls */}
         {isInvalidIdSpecified && (
@@ -277,32 +293,18 @@ export function App() {
           </div>
         )}
 
-        {/* Bottom Floating Control Panel (Field View) */}
+        {/* Bottom Floating Navigation (Field View - compact "Nawiguj" with collapsible menu) */}
         {currentTerritory && (
           <div
             data-field-panel
-            className="absolute bottom-3 sm:bottom-4 left-2.5 right-2.5 sm:left-6 sm:right-auto sm:w-96 z-[450] space-y-2 pointer-events-auto max-h-[calc(100dvh-4.5rem)] overflow-y-auto pb-[env(safe-area-inset-bottom,0px)]"
+            className="absolute bottom-3 sm:bottom-4 left-2.5 right-2.5 sm:left-6 sm:right-auto sm:w-80 md:w-96 z-[450] pointer-events-auto max-h-[calc(100dvh-4.5rem)] overflow-y-auto pb-[env(safe-area-inset-bottom,0px)]"
           >
-            {/* Strict Status Badge */}
-            <StatusBadge
-              distanceResult={distanceResult}
-              gpsStatus={gpsStatus}
-              gpsAccuracy={position?.accuracy}
-              isMock={isTestMode && isMock}
-              onRequestGps={() => {
-                setIsGpsWarningDismissed(false);
-                requestPermission();
-              }}
-              onOpenGpsSimModal={isTestMode ? () => setIsGpsModalOpen(true) : undefined}
-              isDismissed={isGpsWarningDismissed}
-              onDismiss={() => setIsGpsWarningDismissed(true)}
-            />
-
-            {/* Navigation & Google Maps panel */}
             <NavigationPanel
               route={routeInfo}
               distanceResult={distanceResult}
               territory={currentTerritory}
+              isExpanded={isNavigationExpanded}
+              onToggleExpand={() => setIsNavigationExpanded((prev) => !prev)}
             />
           </div>
         )}

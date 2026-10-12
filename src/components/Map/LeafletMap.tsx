@@ -429,8 +429,8 @@ export const LeafletMap: React.FC<LeafletMapProps> = ({
         [bounds[3], bounds[2]]
       );
       mapRef.current.flyToBounds(leafletBounds, {
-        paddingTopLeft: [25, 25],
-        paddingBottomRight: isMobile ? [25, 300] : [50, 50],
+        paddingTopLeft: isMobile ? [20, 65] : [25, 25],
+        paddingBottomRight: isMobile ? [20, 85] : [50, 50],
         maxZoom: 17,
         duration: 0.8,
       });

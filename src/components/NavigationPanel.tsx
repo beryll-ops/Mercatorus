@@ -2,18 +2,22 @@ import React, { useState, useEffect } from 'react';
 import type { RouteInfo, BoundaryDistanceResult, TerritoryFeature } from '../types';
 import { getGoogleMapsUrl } from '../utils/osrm';
 import { getTerritoryInteriorPoint } from '../utils/turfUtils';
-import { ExternalLink, Navigation2, Clock, Footprints, Car, MapPin } from 'lucide-react';
+import { ExternalLink, Navigation2, Clock, Footprints, Car, MapPin, ChevronUp, ChevronDown } from 'lucide-react';
 
 interface NavigationPanelProps {
   route: RouteInfo | null;
   distanceResult: BoundaryDistanceResult | null;
   territory: TerritoryFeature;
+  isExpanded?: boolean;
+  onToggleExpand?: () => void;
 }
 
 export const NavigationPanel: React.FC<NavigationPanelProps> = ({
   route,
   distanceResult,
   territory,
+  isExpanded = false,
+  onToggleExpand,
 }) => {
   const territoryName = territory.properties.name;
   const isInside = distanceResult?.isInside ?? false;
@@ -62,8 +66,60 @@ export const NavigationPanel: React.FC<NavigationPanelProps> = ({
       ? route?.durationSeconds ?? 0
       : route?.drivingDurationSeconds ?? 0;
 
+  // COMPACT COLLAPSED VIEW: Only compact "Nawiguj" button at the bottom
+  if (!isExpanded) {
+    return (
+      <div className="w-full">
+        <button
+          onClick={onToggleExpand}
+          className="w-full min-h-[48px] px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-2xl shadow-2xl flex items-center justify-between border border-blue-400/30 transition active:scale-[0.98] cursor-pointer"
+          title="Rozwiń menu nawigacji do terenu"
+          aria-label="Rozwiń menu nawigacji"
+        >
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="flex items-center justify-center w-7 h-7 rounded-xl bg-white/20 shrink-0">
+              <Navigation2 className="w-4 h-4 text-white" />
+            </div>
+            <span className="text-sm font-bold tracking-wide">Nawiguj</span>
+            {route && !isInside && (
+              <span className="text-xs text-blue-200 font-medium truncate">
+                • {route.distanceMeters >= 1000 ? `${(route.distanceMeters / 1000).toFixed(1)} km` : `${route.distanceMeters} m`}
+              </span>
+            )}
+          </div>
+          <div className="flex items-center gap-1.5 text-xs text-blue-100 bg-white/15 px-2.5 py-1 rounded-xl shrink-0 font-medium">
+            <span>Opcje</span>
+            <ChevronUp className="w-4 h-4 text-white" />
+          </div>
+        </button>
+      </div>
+    );
+  }
+
+  // EXPANDED VIEW: Full menu with collapse button at the top
   return (
-    <div className="bg-slate-900/95 border border-slate-700/80 backdrop-blur-xl rounded-2xl p-3 sm:p-4 shadow-2xl space-y-2 sm:space-y-2.5">
+    <div className="bg-slate-900/95 border border-slate-700/80 backdrop-blur-xl rounded-2xl p-3 sm:p-4 shadow-2xl space-y-2 sm:space-y-2.5 animate-fadeIn">
+      {/* Header bar with collapse button in the same spot */}
+      <div className="flex items-center justify-between pb-2 border-b border-slate-800">
+        <div className="flex items-center gap-2 min-w-0">
+          <Navigation2 className="w-4 h-4 text-blue-400 shrink-0" />
+          <span className="text-xs font-bold text-white uppercase tracking-wider truncate">
+            Nawigacja ({territoryName})
+          </span>
+        </div>
+        {onToggleExpand && (
+          <button
+            onClick={onToggleExpand}
+            className="flex items-center gap-1.5 min-h-[44px] px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition cursor-pointer active:scale-95 shrink-0 border border-slate-700/60"
+            title="Zwiń menu nawigacji"
+            aria-label="Zwiń nawigację"
+          >
+            <span>Zwiń</span>
+            <ChevronDown className="w-4 h-4 text-slate-300" />
+          </button>
+        )}
+      </div>
+
       {/* Route estimation & Travel Mode Switch */}
       {route && !isInside && (
         <div className="space-y-1.5 sm:space-y-2">
