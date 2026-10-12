@@ -10,6 +10,7 @@ interface HeaderProps {
   onBackToLanding: () => void;
   onOpenTerritoryDrawer: () => void;
   onOpenQrGenerator: () => void;
+  onRequestGps?: () => void;
   isInvalidIdSpecified?: boolean;
 }
 
@@ -21,6 +22,7 @@ export const Header: React.FC<HeaderProps> = ({
   onBackToLanding,
   onOpenTerritoryDrawer,
   onOpenQrGenerator,
+  onRequestGps,
   isInvalidIdSpecified,
 }) => {
   return (
@@ -93,10 +95,12 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Right side: Action icons */}
       <div className="flex items-center gap-2 shrink-0">
-        {/* GPS status dot */}
-        <div
-          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-800 border border-slate-700/80 text-xs"
-          title={`Status GPS: ${gpsStatus}`}
+        {/* GPS status button (interactive) */}
+        <button
+          onClick={onRequestGps}
+          className="flex items-center justify-center gap-1.5 min-w-[44px] min-h-[44px] px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700/80 border border-slate-700/80 text-xs transition cursor-pointer active:scale-95"
+          title={`Status GPS: ${gpsStatus === 'granted' ? 'aktywny' : gpsStatus === 'mock' ? 'symulowany' : gpsStatus === 'loading' ? 'szukanie...' : 'niedostępny/brak uprawnień'}. Kliknij, aby sprawdzić/odświeżyć.`}
+          aria-label={`Status GPS: ${gpsStatus}`}
         >
           <Radio
             className={`w-3.5 h-3.5 ${
@@ -110,7 +114,7 @@ export const Header: React.FC<HeaderProps> = ({
           <span className="hidden md:inline text-[11px] font-medium text-slate-300">
             {gpsStatus === 'granted' ? 'GPS aktywny' : gpsStatus === 'mock' ? 'GPS symulowany' : gpsStatus === 'loading' ? 'Szukanie GPS' : 'Brak GPS'}
           </span>
-        </div>
+        </button>
 
         {/* 1-Click Layer Toggle */}
         <button

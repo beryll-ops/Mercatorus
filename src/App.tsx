@@ -27,6 +27,7 @@ export function App() {
   const [isTerritoryDrawerOpen, setIsTerritoryDrawerOpen] = useState(false);
   const [isQrModalOpen, setIsQrModalOpen] = useState(false);
   const [isGpsModalOpen, setIsGpsModalOpen] = useState(false);
+  const [isGpsWarningDismissed, setIsGpsWarningDismissed] = useState(false);
 
   // URL Test Mode (?test=true)
   const [isTestMode, setIsTestMode] = useState(() => {
@@ -224,6 +225,10 @@ export function App() {
         onBackToLanding={() => handleSelectTerritory(null)}
         onOpenTerritoryDrawer={() => setIsTerritoryDrawerOpen(true)}
         onOpenQrGenerator={() => setIsQrModalOpen(true)}
+        onRequestGps={() => {
+          setIsGpsWarningDismissed(false);
+          requestPermission();
+        }}
         isInvalidIdSpecified={isInvalidIdSpecified}
       />
 
@@ -284,8 +289,13 @@ export function App() {
               gpsStatus={gpsStatus}
               gpsAccuracy={position?.accuracy}
               isMock={isTestMode && isMock}
-              onRequestGps={requestPermission}
+              onRequestGps={() => {
+                setIsGpsWarningDismissed(false);
+                requestPermission();
+              }}
               onOpenGpsSimModal={isTestMode ? () => setIsGpsModalOpen(true) : undefined}
+              isDismissed={isGpsWarningDismissed}
+              onDismiss={() => setIsGpsWarningDismissed(true)}
             />
 
             {/* Navigation & Google Maps panel */}

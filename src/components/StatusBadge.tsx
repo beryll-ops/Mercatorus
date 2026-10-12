@@ -1,6 +1,6 @@
 import React from 'react';
 import type { BoundaryDistanceResult, GPSStatus } from '../types';
-import { ShieldCheck, AlertCircle, Compass, Radio } from 'lucide-react';
+import { ShieldCheck, AlertCircle, Compass, Radio, X } from 'lucide-react';
 
 interface StatusBadgeProps {
   distanceResult: BoundaryDistanceResult | null;
@@ -9,6 +9,8 @@ interface StatusBadgeProps {
   isMock?: boolean;
   onRequestGps?: () => void;
   onOpenGpsSimModal?: () => void;
+  isDismissed?: boolean;
+  onDismiss?: () => void;
 }
 
 export const StatusBadge: React.FC<StatusBadgeProps> = ({
@@ -18,45 +20,71 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
   isMock,
   onRequestGps,
   onOpenGpsSimModal,
+  isDismissed,
+  onDismiss,
 }) => {
   // If GPS is denied or unavailable
   if (gpsStatus === 'denied') {
+    if (isDismissed) return null;
     return (
-      <div className="flex items-center justify-between gap-3 px-4 py-3 bg-red-950/90 border border-red-800/80 rounded-2xl shadow-xl backdrop-blur-md text-red-200 text-sm">
-        <div className="flex items-center gap-2.5">
-          <AlertCircle className="w-5 h-5 text-red-400 shrink-0" />
-          <div>
-            <p className="font-semibold text-xs uppercase tracking-wider text-red-400">Brak uprawnień GPS</p>
-            <p className="text-xs text-red-300">Włącz geolokalizację, aby śledzić odległość do granic.</p>
+      <div className="flex items-center justify-between gap-2.5 px-3 py-2 sm:px-4 sm:py-2.5 bg-red-950/90 border border-red-800/80 rounded-2xl shadow-xl backdrop-blur-md text-red-200 text-sm">
+        <div className="flex items-center gap-2 min-w-0">
+          <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-red-400 shrink-0" />
+          <div className="min-w-0">
+            <p className="font-semibold text-xs uppercase tracking-wider text-red-400 sm:hidden">Brak GPS</p>
+            <p className="font-semibold text-xs uppercase tracking-wider text-red-400 hidden sm:block">Brak uprawnień GPS</p>
+            <p className="text-xs text-red-300 hidden sm:block">Włącz geolokalizację, aby śledzić odległość do granic.</p>
           </div>
         </div>
-        {onOpenGpsSimModal && (
-          <button
-            onClick={onOpenGpsSimModal}
-            className="min-h-[44px] px-3.5 py-2 bg-red-800 hover:bg-red-700 text-white rounded-xl text-xs font-semibold whitespace-nowrap transition active:scale-95 cursor-pointer flex items-center justify-center"
-          >
-            Symuluj GPS
-          </button>
-        )}
+        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+          {onRequestGps && (
+            <button
+              onClick={onRequestGps}
+              className="min-h-[44px] px-3 py-1.5 bg-red-800 hover:bg-red-700 text-white rounded-xl text-xs font-semibold whitespace-nowrap transition active:scale-95 cursor-pointer flex items-center justify-center"
+            >
+              Włącz
+            </button>
+          )}
+          {onOpenGpsSimModal && (
+            <button
+              onClick={onOpenGpsSimModal}
+              className="min-h-[44px] px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold whitespace-nowrap transition active:scale-95 cursor-pointer flex items-center justify-center"
+            >
+              Symuluj
+            </button>
+          )}
+          {onDismiss && (
+            <button
+              onClick={onDismiss}
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-red-900/60 hover:bg-red-800/80 text-red-200 hover:text-white transition cursor-pointer active:scale-95"
+              aria-label="Zamknij ostrzeżenie GPS"
+              title="Zamknij ostrzeżenie GPS"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
+        </div>
       </div>
     );
   }
 
   if (gpsStatus === 'unavailable') {
+    if (isDismissed) return null;
     return (
-      <div className="flex items-center justify-between gap-3 px-4 py-3 bg-amber-950/90 border border-amber-800/80 rounded-2xl shadow-xl backdrop-blur-md text-amber-200 text-sm">
-        <div className="flex items-center gap-2.5">
-          <AlertCircle className="w-5 h-5 text-amber-400 shrink-0" />
-          <div>
-            <p className="font-semibold text-xs uppercase tracking-wider text-amber-400">Szukanie sygnału GPS</p>
-            <p className="text-xs text-amber-300">Oczekiwanie na precyzyjny sygnał satelitarny...</p>
+      <div className="flex items-center justify-between gap-2.5 px-3 py-2 sm:px-4 sm:py-2.5 bg-amber-950/90 border border-amber-800/80 rounded-2xl shadow-xl backdrop-blur-md text-amber-200 text-sm">
+        <div className="flex items-center gap-2 min-w-0">
+          <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400 shrink-0" />
+          <div className="min-w-0">
+            <p className="font-semibold text-xs uppercase tracking-wider text-amber-400 sm:hidden">Szukanie GPS</p>
+            <p className="font-semibold text-xs uppercase tracking-wider text-amber-400 hidden sm:block">Szukanie sygnału GPS</p>
+            <p className="text-xs text-amber-300 hidden sm:block">Oczekiwanie na precyzyjny sygnał satelitarny...</p>
           </div>
         </div>
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
           {onRequestGps && (
             <button
               onClick={onRequestGps}
-              className="min-h-[44px] px-3.5 py-2 bg-amber-800 hover:bg-amber-700 text-white rounded-xl text-xs font-semibold whitespace-nowrap transition cursor-pointer flex items-center justify-center"
+              className="min-h-[44px] px-3 py-1.5 bg-amber-800 hover:bg-amber-700 text-white rounded-xl text-xs font-semibold whitespace-nowrap transition cursor-pointer flex items-center justify-center active:scale-95"
             >
               Odśwież
             </button>
@@ -64,9 +92,19 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
           {onOpenGpsSimModal && (
             <button
               onClick={onOpenGpsSimModal}
-              className="min-h-[44px] px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold whitespace-nowrap transition cursor-pointer flex items-center justify-center"
+              className="min-h-[44px] px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold whitespace-nowrap transition cursor-pointer flex items-center justify-center active:scale-95"
             >
               Symuluj
+            </button>
+          )}
+          {onDismiss && (
+            <button
+              onClick={onDismiss}
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-amber-900/60 hover:bg-amber-800/80 text-amber-200 hover:text-white transition cursor-pointer active:scale-95"
+              aria-label="Zamknij ostrzeżenie GPS"
+              title="Zamknij ostrzeżenie GPS"
+            >
+              <X className="w-4 h-4" />
             </button>
           )}
         </div>
@@ -75,10 +113,23 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
   }
 
   if (gpsStatus === 'loading' && !distanceResult) {
+    if (isDismissed) return null;
     return (
-      <div className="flex items-center gap-3 px-4 py-3 bg-slate-900/90 border border-slate-700 rounded-2xl shadow-xl backdrop-blur-md text-slate-300 text-sm">
-        <Radio className="w-5 h-5 text-blue-400 animate-pulse shrink-0" />
-        <span className="text-xs font-medium">Ustalanie Twojej pozycji GPS...</span>
+      <div className="flex items-center justify-between gap-2.5 px-3 py-2 sm:px-4 sm:py-2.5 bg-slate-900/90 border border-slate-700 rounded-2xl shadow-xl backdrop-blur-md text-slate-300 text-sm">
+        <div className="flex items-center gap-2">
+          <Radio className="w-4 h-4 text-blue-400 animate-pulse shrink-0" />
+          <span className="text-xs font-medium">Ustalanie Twojej pozycji GPS...</span>
+        </div>
+        {onDismiss && (
+          <button
+            onClick={onDismiss}
+            className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-slate-200 transition cursor-pointer active:scale-95"
+            aria-label="Zamknij ostrzeżenie GPS"
+            title="Zamknij ostrzeżenie GPS"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        )}
       </div>
     );
   }
