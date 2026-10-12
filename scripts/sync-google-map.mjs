@@ -189,6 +189,28 @@ async function syncGoogleMap() {
 
     const props = rawFeat.properties || {};
     const rawName = props.name ? String(props.name).trim() : `Teren ${idx}`;
+
+    // Filter out degenerate slivers (accidental razor needles from incomplete clicks / drags)
+    try {
+      const area = turf.area(rawFeat);
+      const bbox = turf.bbox(rawFeat);
+      const diag = turf.distance([bbox[0], bbox[1]], [bbox[2], bbox[3]], { units: 'meters' });
+      if (area < 50 && diag > 50) {
+        console.warn(`[ODRZUCONO IGŁĘ/SLIVER] Obiekt "${rawName}" został pominięty (powierzchnia: ${area.toFixed(1)} m², przekątna: ${diag.toFixed(0)} m - niezamknięty lub pusty korytarz).`);
+        continue;
+      }
+    } catch {
+      // ignore
+    }
+
+    // Skip identical duplicate geometry
+    const geomKey = JSON.stringify(geometry.coordinates);
+    const isDuplicate = parsedFeatures.some(f => JSON.stringify(f.geometry.coordinates) === geomKey);
+    if (isDuplicate) {
+      console.log(`[POMINIĘTO DUPLIKAT] Pominięto identyczną geometrię dla "${rawName}"`);
+      continue;
+    }
+
     const candidateId = extractCanonicalId(rawName, props, idx);
 
     let centroid = null;
@@ -235,6 +257,29 @@ async function syncGoogleMap() {
       }
     } else {
       newTerritoriesCount++;
+    }
+
+    // MultiPolygon Auto-Merge: If a territory with this finalId already exists,
+    // merge the polygon rings instead of creating a conflicting duplicate feature!
+    const existingWithSameId = parsedFeatures.find((f) => f.id === finalId);
+    if (existingWithSameId) {
+      console.log(`[MULTIPOLYGON MERGE] Łączenie części wieloczęściowego terenu "${finalId}" (${rawName}) w MultiPolygon`);
+      if (existingWithSameId.geometry.type === 'Polygon') {
+        existingWithSameId.geometry = {
+          type: 'MultiPolygon',
+          coordinates: [
+            existingWithSameId.geometry.coordinates,
+            geometry.type === 'Polygon' ? geometry.coordinates : geometry.coordinates[0],
+          ],
+        };
+      } else if (existingWithSameId.geometry.type === 'MultiPolygon') {
+        if (geometry.type === 'Polygon') {
+          existingWithSameId.geometry.coordinates.push(geometry.coordinates);
+        } else {
+          existingWithSameId.geometry.coordinates.push(...geometry.coordinates);
+        }
+      }
+      continue;
     }
 
     // Disambiguate duplicate IDs if needed while saving original as alias

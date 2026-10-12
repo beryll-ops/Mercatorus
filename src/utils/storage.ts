@@ -24,18 +24,19 @@ export async function loadTerritories(): Promise<{
     }
   }
 
-  // Load from static file (handling any Vite base URL with resilient fallbacks)
+  // Load from static file (handling any Vite base URL with resilient fallbacks and cache-busting)
   const base = import.meta.env.BASE_URL || '/';
-  const primaryUrl = `${base.endsWith('/') ? base : base + '/'}data/territories.geojson`;
+  const timestamp = Date.now();
+  const primaryUrl = `${base.endsWith('/') ? base : base + '/'}data/territories.geojson?v=${timestamp}`;
   const candidateUrls: string[] = [
     primaryUrl,
-    './data/territories.geojson',
-    'data/territories.geojson',
+    `./data/territories.geojson?v=${timestamp}`,
+    `data/territories.geojson?v=${timestamp}`,
   ];
 
   for (const url of candidateUrls) {
     try {
-      const res = await fetch(url);
+      const res = await fetch(url, { cache: 'no-cache' });
       if (res.ok) {
         const data = (await res.json()) as TerritoryCollection;
         if (data && Array.isArray(data.features)) {
