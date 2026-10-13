@@ -63,6 +63,11 @@ export function App() {
     }
   }, [isTestMode, isMock, setMockPosition]);
 
+  // Ensure document and browser tab title is strictly "Mapa terenów"
+  useEffect(() => {
+    document.title = 'Mapa terenów';
+  }, []);
+
   // Route State
   const [routeInfo, setRouteInfo] = useState<RouteInfo | null>(null);
 
@@ -235,8 +240,6 @@ export function App() {
       <Header
         currentTerritory={currentTerritory}
         gpsStatus={gpsStatus}
-        activeLayer={activeLayer}
-        onToggleLayer={handleToggleLayer}
         onBackToLanding={() => handleSelectTerritory(null)}
         onOpenTerritoryDrawer={() => setIsTerritoryDrawerOpen(true)}
         onOpenQrGenerator={() => setIsQrModalOpen(true)}
@@ -341,13 +344,13 @@ export function App() {
               <div className="bg-slate-900/95 border border-slate-700/80 rounded-2xl p-4 shadow-2xl backdrop-blur-md text-center">
                 <p className="text-sm font-semibold text-slate-200">Baza terenów jest pusta</p>
                 <p className="text-xs text-slate-400 mt-1">
-                  Skonfiguruj Google My Maps lub zaimportuj plik KML w generatorze.
+                  Skonfiguruj Google My Maps lub zsynchronizuj dane terenów.
                 </p>
                 <button
                   onClick={() => setIsQrModalOpen(true)}
                   className="mt-3 w-full min-h-[44px] py-2 px-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl text-xs transition cursor-pointer active:scale-95"
                 >
-                  Zaimportuj KML / Opcje
+                  Kody QR
                 </button>
               </div>
             )}

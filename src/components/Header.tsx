@@ -1,13 +1,10 @@
 import React from 'react';
-import type { TerritoryFeature, GPSStatus, MapLayerType } from '../types';
+import type { TerritoryFeature, GPSStatus } from '../types';
 import { ArrowLeft, QrCode, Radio, ListFilter } from 'lucide-react';
-import { SatelliteIcon } from './icons/SatelliteIcon';
 
 interface HeaderProps {
   currentTerritory: TerritoryFeature | null;
   gpsStatus: GPSStatus;
-  activeLayer: MapLayerType;
-  onToggleLayer: () => void;
   onBackToLanding: () => void;
   onOpenTerritoryDrawer: () => void;
   onOpenQrGenerator: () => void;
@@ -18,8 +15,6 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({
   currentTerritory,
   gpsStatus,
-  activeLayer,
-  onToggleLayer,
   onBackToLanding,
   onOpenTerritoryDrawer,
   onOpenQrGenerator,
@@ -92,25 +87,15 @@ export const Header: React.FC<HeaderProps> = ({
           </span>
         </button>
 
-        {/* 1-Click Layer Toggle */}
-        <button
-          onClick={onToggleLayer}
-          className="hidden sm:flex items-center gap-1.5 min-h-[44px] px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-medium transition active:scale-95 cursor-pointer"
-          title={activeLayer === 'streets' ? 'Przełącz na satelitę' : 'Przełącz na mapę uliczną'}
-        >
-          <SatelliteIcon className={`w-4 h-4 transition-colors ${activeLayer === 'satellite' ? 'text-sky-400' : 'text-slate-400'}`} />
-          <span>{activeLayer === 'streets' ? 'Satelita' : 'Ulice'}</span>
-        </button>
-
-        {/* QR & KML Generator Button - visible strictly on the main landing page */}
+        {/* QR Codes Button - visible strictly on the main landing page */}
         {!currentTerritory && !isInvalidIdSpecified && (
           <button
             onClick={onOpenQrGenerator}
             className="flex items-center justify-center gap-1.5 min-w-[44px] min-h-[44px] px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold text-xs shadow-md border border-blue-400/20 transition active:scale-95 cursor-pointer"
-            title="Kreator kart QR i import KML/KMZ"
+            title="Kody QR"
           >
             <QrCode className="w-4 h-4" />
-            <span className="hidden md:inline">Karty QR / Import</span>
+            <span>Kody QR</span>
           </button>
         )}
       </div>
