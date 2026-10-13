@@ -1,6 +1,7 @@
 import React from 'react';
 import type { TerritoryFeature, GPSStatus, MapLayerType } from '../types';
-import { ArrowLeft, QrCode, Layers, Radio, MapPin, ListFilter } from 'lucide-react';
+import { ArrowLeft, QrCode, Radio, MapPin, ListFilter } from 'lucide-react';
+import { SatelliteIcon } from './icons/SatelliteIcon';
 
 interface HeaderProps {
   currentTerritory: TerritoryFeature | null;
@@ -117,7 +118,7 @@ export const Header: React.FC<HeaderProps> = ({
           className="hidden sm:flex items-center gap-1.5 min-h-[44px] px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-medium transition active:scale-95 cursor-pointer"
           title={activeLayer === 'streets' ? 'Przełącz na satelitę' : 'Przełącz na mapę uliczną'}
         >
-          <Layers className="w-4 h-4 text-blue-400" />
+          <SatelliteIcon className={`w-4 h-4 transition-colors ${activeLayer === 'satellite' ? 'text-sky-400' : 'text-slate-400'}`} />
           <span>{activeLayer === 'streets' ? 'Satelita' : 'Ulice'}</span>
         </button>
 

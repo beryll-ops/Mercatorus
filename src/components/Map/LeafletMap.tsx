@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useCallback } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { TerritoryFeature, GPSPosition, RouteInfo, MapLayerType } from '../../types';
-import { Layers, Navigation, Crosshair, ZoomIn, ZoomOut } from 'lucide-react';
+import { Navigation, Crosshair, ZoomIn, ZoomOut } from 'lucide-react';
+import { SatelliteIcon } from '../icons/SatelliteIcon';
 import { getTerritoryBounds, getCollectionBounds } from '../../utils/turfUtils';
 
 interface LeafletMapProps {
@@ -463,7 +464,7 @@ export const LeafletMap: React.FC<LeafletMapProps> = ({
           title={activeLayer === 'streets' ? 'Przełącz na widok satelitarny' : 'Przełącz na widok uliczny'}
           aria-label="Przełącz podkład mapy"
         >
-          <Layers className="w-5 h-5 text-blue-400" />
+          <SatelliteIcon className={`w-5 h-5 transition-colors ${activeLayer === 'satellite' ? 'text-sky-400' : 'text-slate-400'}`} />
         </button>
 
         {/* Territory Focus */}
