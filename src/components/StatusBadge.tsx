@@ -17,17 +17,22 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
   // WARIANT 1: Głosiciel na terenie (w kolorze zielonym)
   if (distanceResult?.isInside) {
     return (
-      <div className="w-full flex items-center px-3 py-1 sm:py-1.5 rounded-lg border backdrop-blur-md shadow-sm bg-slate-900/85 border-emerald-500/30 text-emerald-400 text-[11px] sm:text-xs font-normal select-none">
+      <div className="flex items-center justify-center px-3.5 py-1 sm:py-1.5 rounded-lg border backdrop-blur-md shadow-sm bg-slate-900/85 border-emerald-500/30 text-emerald-400 text-[11px] sm:text-xs font-normal select-none text-center whitespace-nowrap">
         <span>Jesteś na terenie</span>
       </div>
     );
   }
 
-  // WARIANT 2: Głosiciel poza terenem (w kolorze neutralnym)
+  // WARIANT 2: Głosiciel poza terenem (w kolorze neutralnym, z warunkowym km >999m)
   if (distanceResult && !distanceResult.isInside) {
+    const formattedDistance =
+      distanceResult.distanceMeters > 999
+        ? `${(distanceResult.distanceMeters / 1000).toFixed(1)} km do terenu`
+        : `${Math.round(distanceResult.distanceMeters)} metrów do terenu`;
+
     return (
-      <div className="w-full flex items-center px-3 py-1 sm:py-1.5 rounded-lg border backdrop-blur-md shadow-sm bg-slate-900/85 border-slate-700/60 text-slate-300 text-[11px] sm:text-xs font-normal select-none">
-        <span>{Math.round(distanceResult.distanceMeters)} metrów do terenu</span>
+      <div className="flex items-center justify-center px-3.5 py-1 sm:py-1.5 rounded-lg border backdrop-blur-md shadow-sm bg-slate-900/85 border-slate-700/60 text-slate-300 text-[11px] sm:text-xs font-normal select-none text-center whitespace-nowrap">
+        <span>{formattedDistance}</span>
       </div>
     );
   }
@@ -36,7 +41,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
   return (
     <div
       onClick={onRequestGps}
-      className={`w-full flex items-center px-3 py-1 sm:py-1.5 rounded-lg border backdrop-blur-md shadow-sm bg-slate-900/85 border-rose-900/30 text-rose-300/80 text-[11px] sm:text-xs font-normal select-none ${
+      className={`flex items-center justify-center px-3.5 py-1 sm:py-1.5 rounded-lg border backdrop-blur-md shadow-sm bg-slate-900/85 border-rose-900/30 text-rose-300/80 text-[11px] sm:text-xs font-normal select-none text-center whitespace-nowrap ${
         onRequestGps ? 'cursor-pointer' : ''
       }`}
       title={onRequestGps ? 'Dotknij, aby ponowić próbę włączenia lokalizacji' : undefined}

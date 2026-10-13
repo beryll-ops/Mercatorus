@@ -252,7 +252,7 @@ export function App() {
         {currentTerritory && (
           <div
             data-top-status
-            className="absolute top-2.5 left-2.5 right-20 sm:left-4 sm:right-auto sm:max-w-md z-[450] pointer-events-auto"
+            className="absolute top-2.5 left-1/2 -translate-x-1/2 z-[450] pointer-events-auto w-auto max-w-[calc(100%-5.5rem)] sm:max-w-md"
           >
             <StatusBadge
               distanceResult={distanceResult}
