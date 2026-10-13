@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import type { RouteInfo, BoundaryDistanceResult, TerritoryFeature } from '../types';
 import { getGoogleMapsUrl } from '../utils/osrm';
 import { getTerritoryInteriorPoint } from '../utils/turfUtils';
-import { ExternalLink, Navigation2, Clock, Footprints, Car, MapPin, ChevronUp, ChevronDown } from 'lucide-react';
+import { ExternalLink, Navigation2, Clock, Footprints, Car, ChevronUp, ChevronDown } from 'lucide-react';
 
 interface NavigationPanelProps {
   route: RouteInfo | null;
@@ -19,7 +19,6 @@ export const NavigationPanel: React.FC<NavigationPanelProps> = ({
   isExpanded = false,
   onToggleExpand,
 }) => {
-  const territoryName = territory.properties.name;
   const isInside = distanceResult?.isInside ?? false;
 
   // Smart default: for long distances (>= 3 km) default to driving, for walking distances (< 3 km) default to walking
@@ -66,13 +65,13 @@ export const NavigationPanel: React.FC<NavigationPanelProps> = ({
       ? route?.durationSeconds ?? 0
       : route?.drivingDurationSeconds ?? 0;
 
-  // COMPACT COLLAPSED VIEW: Only compact "Nawiguj" button at the bottom
+  // COMPACT COLLAPSED VIEW: Only compact "Nawiguj" button at the bottom (solid blue, no gradient)
   if (!isExpanded) {
     return (
       <div className="w-full">
         <button
           onClick={onToggleExpand}
-          className="w-full min-h-[48px] px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-2xl shadow-2xl flex items-center justify-between border border-blue-400/30 transition active:scale-[0.98] cursor-pointer"
+          className="w-full min-h-[48px] px-4 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-2xl shadow-xl flex items-center justify-between border border-blue-400/30 transition active:scale-[0.98] cursor-pointer"
           title="Rozwiń menu nawigacji do terenu"
           aria-label="Rozwiń menu nawigacji"
         >
@@ -96,31 +95,25 @@ export const NavigationPanel: React.FC<NavigationPanelProps> = ({
     );
   }
 
-  // EXPANDED VIEW: Full menu with collapse button at the top
+  // EXPANDED VIEW: Clean menu with collapse button at top, travel modes, and solid Google Maps button
   return (
-    <div className="bg-slate-900/95 border border-slate-700/80 backdrop-blur-xl rounded-2xl p-3 sm:p-4 shadow-2xl space-y-2 sm:space-y-2.5 animate-fadeIn">
-      {/* Header bar with collapse button in the same spot */}
-      <div className="flex items-center justify-between pb-2 border-b border-slate-800">
-        <div className="flex items-center gap-2 min-w-0">
-          <Navigation2 className="w-4 h-4 text-blue-400 shrink-0" />
-          <span className="text-xs font-bold text-white uppercase tracking-wider truncate">
-            Nawigacja ({territoryName})
-          </span>
-        </div>
-        {onToggleExpand && (
+    <div className="bg-slate-900/95 border border-slate-700/80 backdrop-blur-xl rounded-2xl p-3 sm:p-4 shadow-2xl space-y-2.5 animate-fadeIn">
+      {/* Top bar with collapse button */}
+      {onToggleExpand && (
+        <div className="flex items-center justify-end pb-1.5 border-b border-slate-800">
           <button
             onClick={onToggleExpand}
-            className="flex items-center gap-1.5 min-h-[44px] px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition cursor-pointer active:scale-95 shrink-0 border border-slate-700/60"
+            className="flex items-center gap-1.5 min-h-[38px] px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition cursor-pointer active:scale-95 border border-slate-700/60"
             title="Zwiń menu nawigacji"
             aria-label="Zwiń nawigację"
           >
             <span>Zwiń</span>
             <ChevronDown className="w-4 h-4 text-slate-300" />
           </button>
-        )}
-      </div>
+        </div>
+      )}
 
-      {/* Route estimation & Travel Mode Switch */}
+      {/* Route estimation & Travel Mode Switch (Zielone - zachowane) */}
       {route && !isInside && (
         <div className="space-y-1.5 sm:space-y-2">
           {/* Mode Switch Tabs */}
@@ -195,30 +188,12 @@ export const NavigationPanel: React.FC<NavigationPanelProps> = ({
         </div>
       )}
 
-      {/* When GPS is not yet acquired, show informative target indicator */}
-      {!distanceResult && (
-        <div className="flex items-center gap-2 px-2.5 py-1.5 bg-slate-800/60 rounded-xl text-xs text-slate-300 border border-slate-700/40">
-          <MapPin className="w-3.5 h-3.5 text-sky-400 shrink-0" />
-          <span className="truncate">Cel: środek terenu ({territoryName})</span>
-        </div>
-      )}
-
-      {/* Target coordinates badge */}
-      <div className="flex items-center justify-between text-[11px] text-slate-400 px-1">
-        <span className="truncate max-w-[150px]" title={territoryName}>
-          {distanceResult ? (isInside ? 'Teren aktywny:' : 'Punkt docelowy:') : 'Środek terenu:'}
-        </span>
-        <span className="font-mono text-slate-400 text-[10px] sm:text-[11px]">
-          {destLat.toFixed(5)}°N, {destLng.toFixed(5)}°E
-        </span>
-      </div>
-
-      {/* Primary Action Button: Navigate in Google Maps */}
+      {/* Primary Action Button: Navigate in Google Maps (Żółte - usunięty gradient, czysty niebieski) */}
       <a
         href={googleMapsUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="w-full min-h-[44px] sm:min-h-[48px] px-3.5 py-2.5 sm:px-4 sm:py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-xl shadow-lg flex items-center justify-center gap-2 transition active:scale-[0.98] border border-blue-400/30 text-xs sm:text-sm md:text-base cursor-pointer"
+        className="w-full min-h-[44px] sm:min-h-[48px] px-3.5 py-2.5 sm:px-4 sm:py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl shadow-lg flex items-center justify-center gap-2 transition active:scale-[0.98] border border-blue-400/30 text-xs sm:text-sm md:text-base cursor-pointer"
         title="Otwórz nawigację krok po kroku w aplikacji Google Maps"
       >
         <Navigation2 className="w-4 h-4 sm:w-5 sm:h-5 text-white shrink-0" />
