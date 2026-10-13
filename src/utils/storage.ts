@@ -1,27 +1,16 @@
 import type { TerritoryCollection, TerritoryFeature } from '../types';
 
-const STORAGE_KEY = 'mercatorus_custom_territories';
-
 /**
- * Loads territories: first checks localStorage for custom imported ones,
- * otherwise fetches default from public/data/territories.geojson.
+ * Loads territories directly from synchronized public/data/territories.geojson.
  */
 export async function loadTerritories(): Promise<{
   collection: TerritoryCollection;
-  isCustom: boolean;
 }> {
-  // Check localStorage
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (saved) {
-    try {
-      const parsed = JSON.parse(saved) as TerritoryCollection;
-      if (parsed.type === 'FeatureCollection' && Array.isArray(parsed.features) && parsed.features.length > 0) {
-        return { collection: parsed, isCustom: true };
-      }
-    } catch (e) {
-      console.warn('Failed to parse cached territories from localStorage', e);
-      localStorage.removeItem(STORAGE_KEY);
-    }
+  // Clear any legacy custom territories from old versions
+  try {
+    localStorage.removeItem('mercatorus_custom_territories');
+  } catch {
+    // ignore
   }
 
   // Load from static file (handling any Vite base URL with resilient fallbacks and cache-busting)
@@ -40,7 +29,7 @@ export async function loadTerritories(): Promise<{
       if (res.ok) {
         const data = (await res.json()) as TerritoryCollection;
         if (data && Array.isArray(data.features)) {
-          return { collection: data, isCustom: false };
+          return { collection: data };
         }
       }
     } catch {
@@ -54,22 +43,7 @@ export async function loadTerritories(): Promise<{
       type: 'FeatureCollection',
       features: [],
     },
-    isCustom: false,
   };
-}
-
-/**
- * Saves custom imported territories to localStorage
- */
-export function saveCustomTerritories(collection: TerritoryCollection): void {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(collection));
-}
-
-/**
- * Clears custom imported territories and reverts to default
- */
-export function resetToDefaultTerritories(): void {
-  localStorage.removeItem(STORAGE_KEY);
 }
 
 /**

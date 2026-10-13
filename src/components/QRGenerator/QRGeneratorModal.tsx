@@ -9,9 +9,6 @@ interface QRGeneratorModalProps {
   isOpen: boolean;
   onClose: () => void;
   territories: TerritoryFeature[];
-  onImportSuccess?: (collection: unknown) => void;
-  onResetDefault?: () => void;
-  isCustomLoaded?: boolean;
 }
 
 interface GeneratedCard {

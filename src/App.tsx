@@ -6,7 +6,7 @@ import type {
   BoundaryDistanceResult,
   RouteInfo,
 } from './types';
-import { loadTerritories, saveCustomTerritories, resetToDefaultTerritories, findTerritoryById } from './utils/storage';
+import { loadTerritories, findTerritoryById } from './utils/storage';
 import { calculateBoundaryDistance } from './utils/turfUtils';
 import { fetchRoute } from './utils/osrm';
 import { useGeolocation } from './hooks/useGeolocation';
@@ -22,7 +22,6 @@ import { AlertTriangle, List } from 'lucide-react';
 
 export function App() {
   const [collection, setCollection] = useState<TerritoryCollection | null>(null);
-  const [isCustomLoaded, setIsCustomLoaded] = useState(false);
   const [activeTerritoryId, setActiveTerritoryId] = useState<string | null>(null);
   const [activeLayer, setActiveLayer] = useState<MapLayerType>('streets');
   const [isTerritoryDrawerOpen, setIsTerritoryDrawerOpen] = useState(false);
@@ -113,10 +112,9 @@ export function App() {
   // Load territories on start
   useEffect(() => {
     let isMounted = true;
-    loadTerritories().then(({ collection: loaded, isCustom }) => {
+    loadTerritories().then(({ collection: loaded }) => {
       if (isMounted) {
         setCollection(loaded);
-        setIsCustomLoaded(isCustom);
       }
     });
     return () => {
@@ -218,21 +216,6 @@ export function App() {
   const handleToggleLayer = useCallback(() => {
     setActiveLayer((prev) => (prev === 'streets' ? 'satellite' : 'streets'));
   }, []);
-
-  // Handlers for Custom Import / Reset
-  const handleImportSuccess = (newCollection: TerritoryCollection) => {
-    saveCustomTerritories(newCollection);
-    setCollection(newCollection);
-    setIsCustomLoaded(true);
-  };
-
-  const handleResetDefault = () => {
-    resetToDefaultTerritories();
-    loadTerritories().then(({ collection: loaded, isCustom }) => {
-      setCollection(loaded);
-      setIsCustomLoaded(isCustom);
-    });
-  };
 
   return (
     <div className="relative w-full h-full h-[100dvh] overflow-hidden flex flex-col bg-slate-950 text-slate-100 select-none">
@@ -366,14 +349,11 @@ export function App() {
         onSelect={(id) => handleSelectTerritory(id)}
       />
 
-      {/* QR Generator & KML Importer Modal - strictly only on landing page */}
+      {/* QR Codes Modal - strictly only on landing page */}
       <QRGeneratorModal
         isOpen={isQrModalOpen && !currentTerritory && !isInvalidIdSpecified}
         onClose={() => setIsQrModalOpen(false)}
         territories={collection?.features || []}
-        onImportSuccess={handleImportSuccess}
-        onResetDefault={handleResetDefault}
-        isCustomLoaded={isCustomLoaded}
       />
 
       {/* GPS Simulation Tool Modal (Enabled strictly when test=true in URL) */}
