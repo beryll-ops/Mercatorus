@@ -37,6 +37,13 @@ export function App() {
     return params.get('test') === 'true';
   });
 
+  // URL Param showNavigation (?showNavigation=true)
+  const [showNavigation, setShowNavigation] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    const params = new URLSearchParams(window.location.search);
+    return params.get('showNavigation') === 'true';
+  });
+
   // GPS Tracking Hook
   const {
     position,
@@ -70,6 +77,7 @@ export function App() {
         setIsQrModalOpen(false);
       }
       setIsTestMode(params.get('test') === 'true');
+      setShowNavigation(params.get('showNavigation') === 'true');
     };
 
     // Initial check
@@ -94,6 +102,7 @@ export function App() {
     }
     window.history.pushState({}, '', url.toString());
     setIsTestMode(url.searchParams.get('test') === 'true');
+    setShowNavigation(url.searchParams.get('showNavigation') === 'true');
   }, []);
 
   // Load territories on start
@@ -246,6 +255,7 @@ export function App() {
           onToggleLayer={handleToggleLayer}
           onSelectTerritory={handleSelectTerritory}
           isInvalidIdSpecified={isInvalidIdSpecified}
+          showNavigation={showNavigation}
         />
 
         {/* Top Status Banner (Field View - inside/outside distance & GPS status) */}
@@ -297,8 +307,8 @@ export function App() {
           </div>
         )}
 
-        {/* Bottom Floating Navigation (Field View - compact "Nawiguj" with collapsible menu) */}
-        {currentTerritory && (
+        {/* Bottom Floating Navigation (Field View - visible ONLY when showNavigation=true in URL) */}
+        {currentTerritory && showNavigation && (
           <div
             data-field-panel
             className="absolute bottom-3 sm:bottom-4 left-2.5 right-2.5 sm:left-6 sm:right-auto sm:w-80 md:w-96 z-[450] pointer-events-auto max-h-[calc(100dvh-4.5rem)] overflow-y-auto pb-[env(safe-area-inset-bottom,0px)]"

@@ -14,6 +14,7 @@ interface LeafletMapProps {
   onToggleLayer: () => void;
   onSelectTerritory?: (id: string) => void;
   isInvalidIdSpecified?: boolean;
+  showNavigation?: boolean;
 }
 
 // Custom SVG Icons
@@ -51,6 +52,7 @@ export const LeafletMap: React.FC<LeafletMapProps> = ({
   onToggleLayer,
   onSelectTerritory,
   isInvalidIdSpecified,
+  showNavigation = false,
 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
@@ -165,7 +167,7 @@ export const LeafletMap: React.FC<LeafletMapProps> = ({
           const isMobile = typeof window !== 'undefined' && (window.innerWidth < 640 || window.innerHeight < 500);
           map.fitBounds(leafletBounds, {
             paddingTopLeft: [25, 25],
-            paddingBottomRight: isMobile ? [25, 300] : [50, 50],
+            paddingBottomRight: isMobile ? (showNavigation ? [25, 85] : [25, 35]) : [50, 50],
             maxZoom: 17,
           });
         } catch (e) {
@@ -388,9 +390,6 @@ export const LeafletMap: React.FC<LeafletMapProps> = ({
         if (panelRect.top > 0 && panelRect.top < mapRect.bottom) {
           panelTopInMap = panelRect.top - mapRect.top;
         }
-      } else if (territory) {
-        // Fallback offset if bottom panel is still mounting (~310px)
-        panelTopInMap = Math.max(mapRect.height - 310, 100);
       }
 
       // Check for top alert banner if any
