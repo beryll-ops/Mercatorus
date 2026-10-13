@@ -66,6 +66,12 @@ function resolveMapId() {
       if (conf.googleMapId && conf.googleMapId.trim()) {
         return conf.googleMapId.trim();
       }
+      if (conf.googleMyMapsEditUrl && conf.googleMyMapsEditUrl.trim()) {
+        const match = conf.googleMyMapsEditUrl.match(/[?&]mid=([^&#]+)/);
+        if (match && match[1]) {
+          return decodeURIComponent(match[1]).trim();
+        }
+      }
     } catch {
       // ignore config read error
     }
