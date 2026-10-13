@@ -170,22 +170,23 @@ export const NavigationPanel: React.FC<NavigationPanelProps> = ({
       }}
       className="bg-slate-900/95 border border-slate-700/80 backdrop-blur-xl rounded-2xl p-3 sm:p-4 shadow-2xl space-y-2.5 animate-fadeIn select-none"
     >
-      {/* Top Handle: Centered chevron with drag-to-dismiss and tap-to-collapse */}
+      {/* Top Drag & Tap Bar: Full-width touch edge with large, borderless chevron */}
       {onToggleExpand && (
         <div
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
           onPointerCancel={handlePointerUp}
-          className="flex items-center justify-center -mt-1 -mb-1 py-1.5 touch-none cursor-grab active:cursor-grabbing group"
+          className="w-full -mt-2.5 -mb-1 pt-2 pb-1.5 flex items-center justify-center touch-none cursor-grab active:cursor-grabbing select-none group"
           title="Przeciągnij w dół lub kliknij, aby zwinąć"
           aria-label="Zwiń nawigację"
           role="button"
           tabIndex={0}
         >
-          <div className="flex items-center justify-center w-12 h-5 rounded-full bg-slate-800/80 group-hover:bg-slate-700/90 border border-slate-700/60 transition-colors shadow-sm">
-            <ChevronDown className="w-5 h-4 text-slate-400 group-hover:text-white transition-transform group-active:translate-y-0.5" />
-          </div>
+          <ChevronDown
+            className="w-10 h-6 text-slate-400/80 group-hover:text-slate-200 transition-all transform group-active:translate-y-1"
+            strokeWidth={2.5}
+          />
         </div>
       )}
 
