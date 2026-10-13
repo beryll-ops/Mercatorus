@@ -335,7 +335,7 @@ export function App() {
                 className="w-full py-3.5 px-5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-2xl shadow-2xl flex items-center justify-center gap-3 border border-blue-400/30 transition active:scale-98 text-sm md:text-base cursor-pointer"
               >
                 <List className="w-5 h-5" />
-                <span>Wybierz teren do pracy ({collection.features.length})</span>
+                <span>Wybierz mapę terenu</span>
               </button>
             ) : (
               <div className="bg-slate-900/95 border border-slate-700/80 rounded-2xl p-4 shadow-2xl backdrop-blur-md text-center">
