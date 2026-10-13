@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import type { RouteInfo, BoundaryDistanceResult, TerritoryFeature } from '../types';
 import { getGoogleMapsUrl } from '../utils/osrm';
 import { getTerritoryInteriorPoint } from '../utils/turfUtils';
@@ -24,6 +24,14 @@ export const NavigationPanel: React.FC<NavigationPanelProps> = ({
   // Smart default: for long distances (>= 3 km) default to driving, for walking distances (< 3 km) default to walking
   const [travelMode, setTravelMode] = useState<'walking' | 'driving'>('walking');
 
+  // Gesture state for swipe-down-to-dismiss
+  const [dragY, setDragY] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStartYRef = useRef(0);
+  const dragStartTimeRef = useRef(0);
+  const isPointerDownRef = useRef(false);
+  const hasMovedRef = useRef(false);
+
   useEffect(() => {
     if (route) {
       if (route.distanceMeters >= 3000) {
@@ -35,8 +43,6 @@ export const NavigationPanel: React.FC<NavigationPanelProps> = ({
   }, [route?.distanceMeters]);
 
   // Determine navigation destination coordinates [lng, lat]
-  // When worker is inside territory or GPS is not yet acquired, navigate to territory interior point.
-  // Only navigate to nearest boundary point when worker is strictly outside territory.
   const targetPoint = (distanceResult && !distanceResult.isInside)
     ? distanceResult.nearestPoint
     : getTerritoryInteriorPoint(territory);
@@ -64,6 +70,66 @@ export const NavigationPanel: React.FC<NavigationPanelProps> = ({
     travelMode === 'walking'
       ? route?.durationSeconds ?? 0
       : route?.drivingDurationSeconds ?? 0;
+
+  // Gesture Handlers: Dual-threshold swipe-to-dismiss (Distance: >= 50px | Velocity: >= 0.4 px/ms)
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.button !== 0) return;
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId);
+    } catch {
+      // Ignore if pointer capture fails
+    }
+    dragStartYRef.current = e.clientY;
+    dragStartTimeRef.current = Date.now();
+    isPointerDownRef.current = true;
+    hasMovedRef.current = false;
+    setIsDragging(true);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isPointerDownRef.current) return;
+    const deltaY = e.clientY - dragStartYRef.current;
+    if (Math.abs(deltaY) > 4) {
+      hasMovedRef.current = true;
+    }
+    if (deltaY > 0) {
+      // 1:1 real-time drag translation downwards
+      setDragY(deltaY);
+    } else {
+      // Rubber-band resistance when dragging upwards
+      setDragY(deltaY * 0.15);
+    }
+  };
+
+  const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isPointerDownRef.current) return;
+    isPointerDownRef.current = false;
+    setIsDragging(false);
+
+    try {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    } catch {
+      // Ignore
+    }
+
+    const deltaY = e.clientY - dragStartYRef.current;
+    const timeElapsed = Math.max(1, Date.now() - dragStartTimeRef.current);
+    const velocity = deltaY / timeElapsed; // px / ms
+
+    // Dual-threshold check:
+    // 1. Distance threshold: dragged down >= 50px
+    // 2. Velocity threshold (flick): velocity >= 0.4 px/ms with >= 15px downward motion
+    const shouldDismiss = deltaY >= 50 || (velocity >= 0.4 && deltaY >= 15);
+
+    if (shouldDismiss && onToggleExpand) {
+      onToggleExpand();
+    } else if (!hasMovedRef.current && onToggleExpand) {
+      // Tap without dragging: collapse immediately
+      onToggleExpand();
+    }
+
+    setDragY(0);
+  };
 
   // COMPACT COLLAPSED VIEW: Only compact "Nawiguj" button at the bottom (solid blue, no gradient)
   if (!isExpanded) {
@@ -95,21 +161,31 @@ export const NavigationPanel: React.FC<NavigationPanelProps> = ({
     );
   }
 
-  // EXPANDED VIEW: Clean menu with collapse button at top, travel modes, and solid Google Maps button
+  // EXPANDED VIEW: Bottom sheet with centered chevron handle and drag-to-dismiss gesture
   return (
-    <div className="bg-slate-900/95 border border-slate-700/80 backdrop-blur-xl rounded-2xl p-3 sm:p-4 shadow-2xl space-y-2.5 animate-fadeIn">
-      {/* Top bar with collapse button */}
+    <div
+      style={{
+        transform: `translateY(${Math.max(0, dragY)}px)`,
+        transition: isDragging ? 'none' : 'transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1)',
+      }}
+      className="bg-slate-900/95 border border-slate-700/80 backdrop-blur-xl rounded-2xl p-3 sm:p-4 shadow-2xl space-y-2.5 animate-fadeIn select-none"
+    >
+      {/* Top Handle: Centered chevron with drag-to-dismiss and tap-to-collapse */}
       {onToggleExpand && (
-        <div className="flex items-center justify-end pb-1.5 border-b border-slate-800">
-          <button
-            onClick={onToggleExpand}
-            className="flex items-center gap-1.5 min-h-[38px] px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition cursor-pointer active:scale-95 border border-slate-700/60"
-            title="Zwiń menu nawigacji"
-            aria-label="Zwiń nawigację"
-          >
-            <span>Zwiń</span>
-            <ChevronDown className="w-4 h-4 text-slate-300" />
-          </button>
+        <div
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
+          className="flex items-center justify-center -mt-1 -mb-1 py-1.5 touch-none cursor-grab active:cursor-grabbing group"
+          title="Przeciągnij w dół lub kliknij, aby zwinąć"
+          aria-label="Zwiń nawigację"
+          role="button"
+          tabIndex={0}
+        >
+          <div className="flex items-center justify-center w-12 h-5 rounded-full bg-slate-800/80 group-hover:bg-slate-700/90 border border-slate-700/60 transition-colors shadow-sm">
+            <ChevronDown className="w-5 h-4 text-slate-400 group-hover:text-white transition-transform group-active:translate-y-0.5" />
+          </div>
         </div>
       )}
 
@@ -188,7 +264,7 @@ export const NavigationPanel: React.FC<NavigationPanelProps> = ({
         </div>
       )}
 
-      {/* Primary Action Button: Navigate in Google Maps (Żółte - usunięty gradient, czysty niebieski) */}
+      {/* Primary Action Button: Navigate in Google Maps (solid blue, no gradient) */}
       <a
         href={googleMapsUrl}
         target="_blank"
