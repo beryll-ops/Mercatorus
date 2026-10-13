@@ -54,14 +54,9 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Center/Title Info */}
         <div className="flex flex-col truncate pl-1">
           {currentTerritory ? (
-            <>
-              <h1 className="text-sm md:text-base font-bold text-white truncate">
-                {currentTerritory.properties.name}
-              </h1>
-              <p className="text-[11px] text-slate-400 truncate">
-                {currentTerritory.properties.city || 'Teren przypisany'} {currentTerritory.properties.description ? `• ${currentTerritory.properties.description}` : ''}
-              </p>
-            </>
+            <h1 className="text-sm md:text-base font-bold text-white truncate">
+              {currentTerritory.properties.name}
+            </h1>
           ) : isInvalidIdSpecified ? (
             <div className="flex items-center gap-2">
               <div>
