@@ -185,140 +185,13 @@
       "id": "2-3",
       "properties": {
         "id": "2-3",
-        "name": "Remiszewskiej Kinala",
+        "name": "Dzięcielin",
         "number": "3",
-        "color": "#f57c00",
+        "color": "#ffea00",
         "aliases": [
           "2",
           "3"
         ]
-      },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              15.910358,
-              52.6011698,
-              0
-            ],
-            [
-              15.9102853,
-              52.6011221,
-              0
-            ],
-            [
-              15.9113496,
-              52.6006894,
-              0
-            ],
-            [
-              15.9117487,
-              52.6006842,
-              0
-            ],
-            [
-              15.914019,
-              52.5969489,
-              0
-            ],
-            [
-              15.9146477,
-              52.5960026,
-              0
-            ],
-            [
-              15.9156733,
-              52.5960782,
-              0
-            ],
-            [
-              15.9156733,
-              52.5962529,
-              0
-            ],
-            [
-              15.9160639,
-              52.5963037,
-              0
-            ],
-            [
-              15.9161969,
-              52.5970909,
-              0
-            ],
-            [
-              15.9160081,
-              52.5974611,
-              0
-            ],
-            [
-              15.9157096,
-              52.5974052,
-              0
-            ],
-            [
-              15.9151045,
-              52.5983201,
-              0
-            ],
-            [
-              15.9144393,
-              52.5988806,
-              0
-            ],
-            [
-              15.9143417,
-              52.5992325,
-              0
-            ],
-            [
-              15.9144275,
-              52.5997407,
-              0
-            ],
-            [
-              15.9154102,
-              52.6004269,
-              0
-            ],
-            [
-              15.9131862,
-              52.6008831,
-              0
-            ],
-            [
-              15.912345,
-              52.6010186,
-              0
-            ],
-            [
-              15.9114567,
-              52.6009639,
-              0
-            ],
-            [
-              15.9107314,
-              52.6012349,
-              0
-            ],
-            [
-              15.910358,
-              52.6011698,
-              0
-            ]
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "4",
-      "properties": {
-        "id": "4",
-        "name": "Dzięcielin",
-        "number": "4",
-        "color": "#ffea00"
       },
       "geometry": {
         "type": "Polygon",
@@ -435,11 +308,11 @@
     },
     {
       "type": "Feature",
-      "id": "5",
+      "id": "4",
       "properties": {
-        "id": "5",
+        "id": "4",
         "name": "M01 Powstańców Wlkp, Wyspiańskiego",
-        "number": "5",
+        "number": "4",
         "color": "#ff5252"
       },
       "geometry": {
@@ -637,11 +510,11 @@
     },
     {
       "type": "Feature",
-      "id": "6",
+      "id": "5",
       "properties": {
-        "id": "6",
+        "id": "5",
         "name": "M02 Pohla, Strzelecka, Konopnickiej",
-        "number": "6",
+        "number": "5",
         "color": "#ffea00"
       },
       "geometry": {
@@ -909,11 +782,11 @@
     },
     {
       "type": "Feature",
-      "id": "7",
+      "id": "6",
       "properties": {
-        "id": "7",
+        "id": "6",
         "name": "M03 Gintera, Gracza, Tymek",
-        "number": "7",
+        "number": "6",
         "color": "#7cb342"
       },
       "geometry": {
@@ -996,11 +869,11 @@
     },
     {
       "type": "Feature",
-      "id": "8",
+      "id": "7",
       "properties": {
-        "id": "8",
+        "id": "7",
         "name": "M04 Świerkowa, Akacjona, Klonowa, Kalinowa, Olchowa, Dębowa, Modrzewiowa",
-        "number": "8",
+        "number": "7",
         "description": "Modrzewiowa nie jest jeszcze wybudowana",
         "color": "#7cb342"
       },
@@ -1189,11 +1062,11 @@
     },
     {
       "type": "Feature",
-      "id": "9",
+      "id": "8",
       "properties": {
-        "id": "9",
+        "id": "8",
         "name": "M05 Bagienna, Zielona, Ogrodowa",
-        "number": "9",
+        "number": "8",
         "color": "#f57c00"
       },
       "geometry": {
@@ -1381,11 +1254,11 @@
     },
     {
       "type": "Feature",
-      "id": "10",
+      "id": "9",
       "properties": {
-        "id": "10",
+        "id": "9",
         "name": "M06 Poznańska, Na Ostrawy",
-        "number": "10",
+        "number": "9",
         "color": "#0288d1"
       },
       "geometry": {
@@ -1533,11 +1406,11 @@
     },
     {
       "type": "Feature",
-      "id": "11",
+      "id": "10",
       "properties": {
-        "id": "11",
+        "id": "10",
         "name": "M07 Sadowa, Wiśniowa, Morelowa, Śliwkowa, Brzoskwiniowa, Czereśniowa, Gruszkowa, Jabłonowa",
-        "number": "11",
+        "number": "10",
         "color": "#ffea00"
       },
       "geometry": {
@@ -1710,11 +1583,11 @@
     },
     {
       "type": "Feature",
-      "id": "12",
+      "id": "11",
       "properties": {
-        "id": "12",
+        "id": "11",
         "name": "M08 Daszyńskiego 1, 3",
-        "number": "12",
+        "number": "11",
         "color": "#ffea00"
       },
       "geometry": {
@@ -1752,11 +1625,11 @@
     },
     {
       "type": "Feature",
-      "id": "13",
+      "id": "12",
       "properties": {
-        "id": "13",
+        "id": "12",
         "name": "M09 Daszyńskiego 2",
-        "number": "13",
+        "number": "12",
         "color": "#7cb342"
       },
       "geometry": {
@@ -1794,11 +1667,11 @@
     },
     {
       "type": "Feature",
-      "id": "14",
+      "id": "13",
       "properties": {
-        "id": "14",
+        "id": "13",
         "name": "M10 Daszyńskiego 4, 6, 8, 10",
-        "number": "14",
+        "number": "13",
         "color": "#ff5252"
       },
       "geometry": {
@@ -1856,11 +1729,11 @@
     },
     {
       "type": "Feature",
-      "id": "15",
+      "id": "14",
       "properties": {
-        "id": "15",
+        "id": "14",
         "name": "M11 Daszyńskiego 5-19 nieparzyste",
-        "number": "15",
+        "number": "14",
         "color": "#0288d1"
       },
       "geometry": {
@@ -1933,11 +1806,11 @@
     },
     {
       "type": "Feature",
-      "id": "16",
+      "id": "15",
       "properties": {
-        "id": "16",
+        "id": "15",
         "name": "M12 Daszyńskiego 23, Szeroka",
-        "number": "16",
+        "number": "15",
         "color": "#f57c00"
       },
       "geometry": {
@@ -2045,11 +1918,11 @@
     },
     {
       "type": "Feature",
-      "id": "17",
+      "id": "16",
       "properties": {
-        "id": "17",
+        "id": "16",
         "name": "M13 Wąska",
-        "number": "17",
+        "number": "16",
         "color": "#ffea00"
       },
       "geometry": {
@@ -2107,11 +1980,11 @@
     },
     {
       "type": "Feature",
-      "id": "18",
+      "id": "17",
       "properties": {
-        "id": "18",
+        "id": "17",
         "name": "M14 Piłsudskiego 1",
-        "number": "18",
+        "number": "17",
         "color": "#ffea00"
       },
       "geometry": {
@@ -2149,11 +2022,11 @@
     },
     {
       "type": "Feature",
-      "id": "19",
+      "id": "18",
       "properties": {
-        "id": "19",
+        "id": "18",
         "name": "M15 Piłsudskiego 4-16 3-47",
-        "number": "19",
+        "number": "18",
         "color": "#0288d1"
       },
       "geometry": {
@@ -2311,11 +2184,11 @@
     },
     {
       "type": "Feature",
-      "id": "20",
+      "id": "19",
       "properties": {
-        "id": "20",
+        "id": "19",
         "name": "M16 Piłsudskiego 20-30 39-55",
-        "number": "20",
+        "number": "19",
         "color": "#f57c00"
       },
       "geometry": {
@@ -2463,11 +2336,11 @@
     },
     {
       "type": "Feature",
-      "id": "21",
+      "id": "20",
       "properties": {
-        "id": "21",
+        "id": "20",
         "name": "M17 Mickiewicza, Zamkowa",
-        "number": "21",
+        "number": "20",
         "color": "#f57c00"
       },
       "geometry": {
@@ -2560,11 +2433,11 @@
     },
     {
       "type": "Feature",
-      "id": "22",
+      "id": "21",
       "properties": {
-        "id": "22",
+        "id": "21",
         "name": "M18 Słowackiego, Chramca",
-        "number": "22",
+        "number": "21",
         "color": "#ffea00"
       },
       "geometry": {
@@ -2692,11 +2565,11 @@
     },
     {
       "type": "Feature",
-      "id": "23",
+      "id": "22",
       "properties": {
-        "id": "23",
+        "id": "22",
         "name": "M19 Wyszyńskiego 1-4",
-        "number": "23",
+        "number": "22",
         "color": "#f57c00"
       },
       "geometry": {
@@ -2734,11 +2607,11 @@
     },
     {
       "type": "Feature",
-      "id": "24",
+      "id": "23",
       "properties": {
-        "id": "24",
+        "id": "23",
         "name": "M20 Wyszyńskiego 5, 6",
-        "number": "24",
+        "number": "23",
         "color": "#ff5252"
       },
       "geometry": {
@@ -2781,11 +2654,11 @@
     },
     {
       "type": "Feature",
-      "id": "25",
+      "id": "24",
       "properties": {
-        "id": "25",
+        "id": "24",
         "name": "M21 Szpitalna 2",
-        "number": "25",
+        "number": "24",
         "color": "#ff5252"
       },
       "geometry": {
@@ -2823,11 +2696,11 @@
     },
     {
       "type": "Feature",
-      "id": "26",
+      "id": "25",
       "properties": {
-        "id": "26",
+        "id": "25",
         "name": "M22 Podgórna",
-        "number": "26",
+        "number": "25",
         "color": "#7cb342"
       },
       "geometry": {
@@ -3010,11 +2883,11 @@
     },
     {
       "type": "Feature",
-      "id": "27",
+      "id": "26",
       "properties": {
-        "id": "27",
+        "id": "26",
         "name": "M23 Gorzycka (od Dworcowej do wiaduktu)",
-        "number": "27",
+        "number": "26",
         "color": "#0288d1"
       },
       "geometry": {
@@ -3107,11 +2980,11 @@
     },
     {
       "type": "Feature",
-      "id": "28",
+      "id": "27",
       "properties": {
-        "id": "28",
+        "id": "27",
         "name": "M24 Wjazdowa 1",
-        "number": "28",
+        "number": "27",
         "color": "#f57c00"
       },
       "geometry": {
@@ -3154,11 +3027,11 @@
     },
     {
       "type": "Feature",
-      "id": "29",
+      "id": "28",
       "properties": {
-        "id": "29",
+        "id": "28",
         "name": "M25 Wjazdowa 2, 3",
-        "number": "29",
+        "number": "28",
         "color": "#0288d1"
       },
       "geometry": {
@@ -3271,11 +3144,11 @@
     },
     {
       "type": "Feature",
-      "id": "30",
+      "id": "29",
       "properties": {
-        "id": "30",
+        "id": "29",
         "name": "M26 Wjazdowa 4, 6, 8, 12",
-        "number": "30",
+        "number": "29",
         "color": "#ffea00"
       },
       "geometry": {
@@ -3403,11 +3276,11 @@
     },
     {
       "type": "Feature",
-      "id": "31",
+      "id": "30",
       "properties": {
-        "id": "31",
+        "id": "30",
         "name": "M27 Moniuszki, Wieniawskiego, Paderewskiego, Szymanowskiego, Karłowicza, Jaskłócza, Wiatraczna",
-        "number": "31",
+        "number": "30",
         "color": "#f57c00"
       },
       "geometry": {
@@ -3510,11 +3383,11 @@
     },
     {
       "type": "Feature",
-      "id": "32",
+      "id": "31",
       "properties": {
-        "id": "32",
+        "id": "31",
         "name": "M28 Szpilmana, Noskowskiego, Lutosławskiego, Zagrodowa, Kurpińskiego, Jagodowa, Truskawkowa, Malinowa",
-        "number": "32",
+        "number": "31",
         "color": "#0288d1"
       },
       "geometry": {
@@ -3667,11 +3540,11 @@
     },
     {
       "type": "Feature",
-      "id": "33",
+      "id": "32",
       "properties": {
-        "id": "33",
+        "id": "32",
         "name": "M29 Wały Jana Kazimierza od ronda, Zaułek Rzeczny, Przy Wale, Dworzec, Muchocińska, Słodowy Młyn",
-        "number": "33",
+        "number": "32",
         "color": "#7cb342"
       },
       "geometry": {
@@ -4154,11 +4027,11 @@
     },
     {
       "type": "Feature",
-      "id": "34",
+      "id": "33",
       "properties": {
-        "id": "34",
+        "id": "33",
         "name": "M30 Dworcowa prawa strona",
-        "number": "34",
+        "number": "33",
         "color": "#ffea00"
       },
       "geometry": {
@@ -4286,11 +4159,11 @@
     },
     {
       "type": "Feature",
-      "id": "35",
+      "id": "34",
       "properties": {
-        "id": "35",
+        "id": "34",
         "name": "M31 Dworcowa 1-11 Nieparzyste",
-        "number": "35",
+        "number": "34",
         "color": "#0f9d58"
       },
       "geometry": {
@@ -4363,11 +4236,11 @@
     },
     {
       "type": "Feature",
-      "id": "36",
+      "id": "35",
       "properties": {
-        "id": "36",
+        "id": "35",
         "name": "M32 Dworcowa 13, 15",
-        "number": "36",
+        "number": "35",
         "color": "#ff5252"
       },
       "geometry": {
@@ -4425,11 +4298,11 @@
     },
     {
       "type": "Feature",
-      "id": "37",
+      "id": "36",
       "properties": {
-        "id": "37",
+        "id": "36",
         "name": "M33 Sienna, Usługowa, Kościelna",
-        "number": "37",
+        "number": "36",
         "color": "#ff5252"
       },
       "geometry": {
@@ -4627,11 +4500,11 @@
     },
     {
       "type": "Feature",
-      "id": "38",
+      "id": "37",
       "properties": {
-        "id": "38",
+        "id": "37",
         "name": "M34 Czynu 600-Lecia, Mostowa, Browarowa",
-        "number": "38",
+        "number": "37",
         "color": "#ff5252"
       },
       "geometry": {
@@ -4734,8 +4607,13 @@
               0
             ],
             [
-              15.8962704,
-              52.6043512,
+              15.8967317,
+              52.6043952,
+              0
+            ],
+            [
+              15.896415,
+              52.60466,
               0
             ],
             [
@@ -4949,11 +4827,11 @@
     },
     {
       "type": "Feature",
-      "id": "39",
+      "id": "38",
       "properties": {
-        "id": "39",
+        "id": "38",
         "name": "M35 Rynek, Rynkowa, Kilińskiego",
-        "number": "39",
+        "number": "38",
         "color": "#0288d1"
       },
       "geometry": {
@@ -5121,11 +4999,11 @@
     },
     {
       "type": "Feature",
-      "id": "40",
+      "id": "39",
       "properties": {
-        "id": "40",
+        "id": "39",
         "name": "M36 17 Stycznia 1-85 Nieparzyste",
-        "number": "40",
+        "number": "39",
         "color": "#0f9d58"
       },
       "geometry": {
@@ -5378,11 +5256,11 @@
     },
     {
       "type": "Feature",
-      "id": "41",
+      "id": "40",
       "properties": {
-        "id": "41",
+        "id": "40",
         "name": "M37 17 Stycznia 2-66 Parzyste",
-        "number": "41",
+        "number": "40",
         "color": "#ffea00"
       },
       "geometry": {
@@ -5640,11 +5518,11 @@
     },
     {
       "type": "Feature",
-      "id": "42",
+      "id": "41",
       "properties": {
-        "id": "42",
+        "id": "41",
         "name": "M38 17 Stycznia 87-155 Nieparzyste",
-        "number": "42",
+        "number": "41",
         "color": "#f57c00"
       },
       "geometry": {
@@ -5912,11 +5790,11 @@
     },
     {
       "type": "Feature",
-      "id": "43",
+      "id": "42",
       "properties": {
-        "id": "43",
+        "id": "42",
         "name": "M39 17 Stycznia 68-120 Parzyste",
-        "number": "43",
+        "number": "42",
         "color": "#7cb342"
       },
       "geometry": {
@@ -6049,11 +5927,11 @@
     },
     {
       "type": "Feature",
-      "id": "44",
+      "id": "43",
       "properties": {
-        "id": "44",
+        "id": "43",
         "name": "M40 Nadjeziorna, Rybacka, Spichrzowa, Zewnętrzna",
-        "number": "44",
+        "number": "43",
         "color": "#f57c00"
       },
       "geometry": {
@@ -6106,11 +5984,11 @@
     },
     {
       "type": "Feature",
-      "id": "45",
+      "id": "44",
       "properties": {
-        "id": "45",
+        "id": "44",
         "name": "M41 Tietza, 3 Maja, Szkolna, Pl. Kościuszki",
-        "number": "45",
+        "number": "44",
         "color": "#0097a7"
       },
       "geometry": {
@@ -6328,11 +6206,11 @@
     },
     {
       "type": "Feature",
-      "id": "46",
+      "id": "45",
       "properties": {
-        "id": "46",
+        "id": "45",
         "name": "M42 Sportowa, Strażacka, Pl. Rolny, Rolna",
-        "number": "46",
+        "number": "45",
         "color": "#ffea00"
       },
       "geometry": {
@@ -6460,11 +6338,11 @@
     },
     {
       "type": "Feature",
-      "id": "47",
+      "id": "46",
       "properties": {
-        "id": "47",
+        "id": "46",
         "name": "M43 Pocztowa, Iczka, Sokoła",
-        "number": "47",
+        "number": "46",
         "color": "#ff5252"
       },
       "geometry": {
@@ -6737,11 +6615,11 @@
     },
     {
       "type": "Feature",
-      "id": "48",
+      "id": "47",
       "properties": {
-        "id": "48",
+        "id": "47",
         "name": "M44 Jana Pawła II prawa strona",
-        "number": "48",
+        "number": "47",
         "color": "#ffea00"
       },
       "geometry": {
@@ -6894,11 +6772,11 @@
     },
     {
       "type": "Feature",
-      "id": "49",
+      "id": "48",
       "properties": {
-        "id": "49",
+        "id": "48",
         "name": "M45 Jana Pawła II lewa strona",
-        "number": "49",
+        "number": "48",
         "color": "#ff5252"
       },
       "geometry": {
@@ -7111,11 +6989,11 @@
     },
     {
       "type": "Feature",
-      "id": "50",
+      "id": "49",
       "properties": {
-        "id": "50",
+        "id": "49",
         "name": "M46 Słoneczna, Nowa, Na Skarpie,",
-        "number": "50",
+        "number": "49",
         "color": "#7cb342"
       },
       "geometry": {
@@ -7458,11 +7336,11 @@
     },
     {
       "type": "Feature",
-      "id": "51",
+      "id": "50",
       "properties": {
-        "id": "51",
+        "id": "50",
         "name": "M47 Armii Poznań 1 do piaskowej, Piaskowa, Tęczowa, Prusimska",
-        "number": "51",
+        "number": "50",
         "color": "#ff5252"
       },
       "geometry": {
@@ -7605,11 +7483,11 @@
     },
     {
       "type": "Feature",
-      "id": "52",
+      "id": "51",
       "properties": {
-        "id": "52",
+        "id": "51",
         "name": "M48 Armii Poznań od Piaskowej do końca",
-        "number": "52",
+        "number": "51",
         "color": "#ffea00"
       },
       "geometry": {
@@ -7862,11 +7740,11 @@
     },
     {
       "type": "Feature",
-      "id": "53",
+      "id": "52",
       "properties": {
-        "id": "53",
+        "id": "52",
         "name": "M49 Kwiatowa, Bzowa",
-        "number": "53",
+        "number": "52",
         "color": "#7cb342"
       },
       "geometry": {
@@ -8064,11 +7942,11 @@
     },
     {
       "type": "Feature",
-      "id": "54",
+      "id": "53",
       "properties": {
-        "id": "54",
+        "id": "53",
         "name": "M50 Fiołkowa, Narcyzowa, Storczykowa",
-        "number": "54",
+        "number": "53",
         "color": "#0288d1"
       },
       "geometry": {
@@ -8231,11 +8109,11 @@
     },
     {
       "type": "Feature",
-      "id": "55",
+      "id": "54",
       "properties": {
-        "id": "55",
+        "id": "54",
         "name": "M51 Konwaliowa, Różana, Goździkowa, Jaśminowa",
-        "number": "55",
+        "number": "54",
         "color": "#f57c00"
       },
       "geometry": {
@@ -8383,11 +8261,11 @@
     },
     {
       "type": "Feature",
-      "id": "56",
+      "id": "55",
       "properties": {
-        "id": "56",
+        "id": "55",
         "name": "M52 Nadbrzeżna, Garbarska, Składowa, Wioślarska, Gazownicza, Wały Jana Kazimierza do ronda",
-        "number": "56",
+        "number": "55",
         "color": "#0288d1"
       },
       "geometry": {
@@ -8797,6 +8675,133 @@
             [
               15.8939551,
               52.6057733,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "56",
+      "properties": {
+        "id": "56",
+        "name": "M66 Remiszewskiej Kinala",
+        "number": "56",
+        "color": "#f57c00"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              15.910358,
+              52.6011698,
+              0
+            ],
+            [
+              15.9102853,
+              52.6011221,
+              0
+            ],
+            [
+              15.9113496,
+              52.6006894,
+              0
+            ],
+            [
+              15.9117487,
+              52.6006842,
+              0
+            ],
+            [
+              15.914019,
+              52.5969489,
+              0
+            ],
+            [
+              15.9146477,
+              52.5960026,
+              0
+            ],
+            [
+              15.9156733,
+              52.5960782,
+              0
+            ],
+            [
+              15.9156733,
+              52.5962529,
+              0
+            ],
+            [
+              15.9160639,
+              52.5963037,
+              0
+            ],
+            [
+              15.9161969,
+              52.5970909,
+              0
+            ],
+            [
+              15.9160081,
+              52.5974611,
+              0
+            ],
+            [
+              15.9157096,
+              52.5974052,
+              0
+            ],
+            [
+              15.9151045,
+              52.5983201,
+              0
+            ],
+            [
+              15.9144393,
+              52.5988806,
+              0
+            ],
+            [
+              15.9143417,
+              52.5992325,
+              0
+            ],
+            [
+              15.9144275,
+              52.5997407,
+              0
+            ],
+            [
+              15.9154102,
+              52.6004269,
+              0
+            ],
+            [
+              15.9131862,
+              52.6008831,
+              0
+            ],
+            [
+              15.912345,
+              52.6010186,
+              0
+            ],
+            [
+              15.9114567,
+              52.6009639,
+              0
+            ],
+            [
+              15.9107314,
+              52.6012349,
+              0
+            ],
+            [
+              15.910358,
+              52.6011698,
               0
             ]
           ]
