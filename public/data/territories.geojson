@@ -6,313 +6,8 @@
       "id": "1",
       "properties": {
         "id": "1",
-        "name": "Wielowieś prawa strona",
-        "number": "1",
-        "color": "#7cb342"
-      },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              15.898241,
-              52.5892868,
-              0
-            ],
-            [
-              15.8971095,
-              52.5893433,
-              0
-            ],
-            [
-              15.8960852,
-              52.5890216,
-              0
-            ],
-            [
-              15.8989506,
-              52.578379,
-              0
-            ],
-            [
-              15.898802,
-              52.5773024,
-              0
-            ],
-            [
-              15.8979471,
-              52.5745498,
-              0
-            ],
-            [
-              15.8991688,
-              52.5744196,
-              0
-            ],
-            [
-              15.9000479,
-              52.5771777,
-              0
-            ],
-            [
-              15.8994791,
-              52.5819469,
-              0
-            ],
-            [
-              15.8992109,
-              52.583535,
-              0
-            ],
-            [
-              15.8985673,
-              52.5855271,
-              0
-            ],
-            [
-              15.898241,
-              52.5892868,
-              0
-            ]
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "2",
-      "properties": {
-        "id": "2",
-        "name": "Wielowieś lewa strona",
-        "number": "2",
-        "color": "#f9a825"
-      },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              15.8950654,
-              52.5920526,
-              0
-            ],
-            [
-              15.8949602,
-              52.5920474,
-              0
-            ],
-            [
-              15.8904084,
-              52.5874566,
-              0
-            ],
-            [
-              15.8907733,
-              52.5864658,
-              0
-            ],
-            [
-              15.893477,
-              52.5866457,
-              0
-            ],
-            [
-              15.8937988,
-              52.5850865,
-              0
-            ],
-            [
-              15.8897755,
-              52.5842091,
-              0
-            ],
-            [
-              15.8898077,
-              52.5835402,
-              0
-            ],
-            [
-              15.8958479,
-              52.5841504,
-              0
-            ],
-            [
-              15.8973688,
-              52.5785398,
-              0
-            ],
-            [
-              15.8965507,
-              52.5745197,
-              0
-            ],
-            [
-              15.8976812,
-              52.5744067,
-              0
-            ],
-            [
-              15.8984181,
-              52.576893,
-              0
-            ],
-            [
-              15.8987008,
-              52.5776667,
-              0
-            ],
-            [
-              15.898726,
-              52.5784404,
-              0
-            ],
-            [
-              15.8963952,
-              52.5868465,
-              0
-            ],
-            [
-              15.8950654,
-              52.5920526,
-              0
-            ]
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "2-3",
-      "properties": {
-        "id": "2-3",
-        "name": "Dzięcielin",
-        "number": "3",
-        "color": "#ffea00",
-        "aliases": [
-          "2",
-          "3"
-        ]
-      },
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              15.9083044,
-              52.5963493,
-              0
-            ],
-            [
-              15.9072958,
-              52.5962711,
-              0
-            ],
-            [
-              15.9078194,
-              52.594094,
-              0
-            ],
-            [
-              15.909727,
-              52.5876811,
-              0
-            ],
-            [
-              15.9108398,
-              52.5854327,
-              0
-            ],
-            [
-              15.9115865,
-              52.5854431,
-              0
-            ],
-            [
-              15.9129169,
-              52.5822814,
-              0
-            ],
-            [
-              15.9109085,
-              52.5820885,
-              0
-            ],
-            [
-              15.9112775,
-              52.5810924,
-              0
-            ],
-            [
-              15.9144018,
-              52.5813844,
-              0
-            ],
-            [
-              15.9148738,
-              52.5805082,
-              0
-            ],
-            [
-              15.9170883,
-              52.5809411,
-              0
-            ],
-            [
-              15.9191396,
-              52.5801692,
-              0
-            ],
-            [
-              15.9196546,
-              52.580649,
-              0
-            ],
-            [
-              15.9149511,
-              52.5831628,
-              0
-            ],
-            [
-              15.9141443,
-              52.5851915,
-              0
-            ],
-            [
-              15.9160068,
-              52.5854079,
-              0
-            ],
-            [
-              15.9148932,
-              52.5894479,
-              0
-            ],
-            [
-              15.9139254,
-              52.5893632,
-              0
-            ],
-            [
-              15.9103119,
-              52.5965298,
-              0
-            ],
-            [
-              15.9083044,
-              52.5963493,
-              0
-            ]
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "id": "4",
-      "properties": {
-        "id": "4",
         "name": "M01 Powstańców Wlkp, Wyspiańskiego",
-        "number": "4",
+        "number": "1",
         "color": "#ff5252"
       },
       "geometry": {
@@ -510,11 +205,11 @@
     },
     {
       "type": "Feature",
-      "id": "5",
+      "id": "2",
       "properties": {
-        "id": "5",
+        "id": "2",
         "name": "M02 Pohla, Strzelecka, Konopnickiej",
-        "number": "5",
+        "number": "2",
         "color": "#ffea00"
       },
       "geometry": {
@@ -782,12 +477,16 @@
     },
     {
       "type": "Feature",
-      "id": "6",
+      "id": "2-3",
       "properties": {
-        "id": "6",
+        "id": "2-3",
         "name": "M03 Gintera, Gracza, Tymek",
-        "number": "6",
-        "color": "#7cb342"
+        "number": "3",
+        "color": "#7cb342",
+        "aliases": [
+          "2",
+          "3"
+        ]
       },
       "geometry": {
         "type": "Polygon",
@@ -869,11 +568,11 @@
     },
     {
       "type": "Feature",
-      "id": "7",
+      "id": "4",
       "properties": {
-        "id": "7",
+        "id": "4",
         "name": "M04 Świerkowa, Akacjona, Klonowa, Kalinowa, Olchowa, Dębowa, Modrzewiowa",
-        "number": "7",
+        "number": "4",
         "description": "Modrzewiowa nie jest jeszcze wybudowana",
         "color": "#7cb342"
       },
@@ -1062,11 +761,11 @@
     },
     {
       "type": "Feature",
-      "id": "8",
+      "id": "5",
       "properties": {
-        "id": "8",
+        "id": "5",
         "name": "M05 Bagienna, Zielona, Ogrodowa",
-        "number": "8",
+        "number": "5",
         "color": "#f57c00"
       },
       "geometry": {
@@ -1254,11 +953,11 @@
     },
     {
       "type": "Feature",
-      "id": "9",
+      "id": "6",
       "properties": {
-        "id": "9",
+        "id": "6",
         "name": "M06 Poznańska, Na Ostrawy",
-        "number": "9",
+        "number": "6",
         "color": "#0288d1"
       },
       "geometry": {
@@ -1406,11 +1105,11 @@
     },
     {
       "type": "Feature",
-      "id": "10",
+      "id": "7",
       "properties": {
-        "id": "10",
+        "id": "7",
         "name": "M07 Sadowa, Wiśniowa, Morelowa, Śliwkowa, Brzoskwiniowa, Czereśniowa, Gruszkowa, Jabłonowa",
-        "number": "10",
+        "number": "7",
         "color": "#ffea00"
       },
       "geometry": {
@@ -1583,11 +1282,11 @@
     },
     {
       "type": "Feature",
-      "id": "11",
+      "id": "8",
       "properties": {
-        "id": "11",
+        "id": "8",
         "name": "M08 Daszyńskiego 1, 3",
-        "number": "11",
+        "number": "8",
         "color": "#ffea00"
       },
       "geometry": {
@@ -1625,11 +1324,11 @@
     },
     {
       "type": "Feature",
-      "id": "12",
+      "id": "9",
       "properties": {
-        "id": "12",
+        "id": "9",
         "name": "M09 Daszyńskiego 2",
-        "number": "12",
+        "number": "9",
         "color": "#7cb342"
       },
       "geometry": {
@@ -1667,11 +1366,11 @@
     },
     {
       "type": "Feature",
-      "id": "13",
+      "id": "10",
       "properties": {
-        "id": "13",
+        "id": "10",
         "name": "M10 Daszyńskiego 4, 6, 8, 10",
-        "number": "13",
+        "number": "10",
         "color": "#ff5252"
       },
       "geometry": {
@@ -1729,11 +1428,11 @@
     },
     {
       "type": "Feature",
-      "id": "14",
+      "id": "11",
       "properties": {
-        "id": "14",
+        "id": "11",
         "name": "M11 Daszyńskiego 5-19 nieparzyste",
-        "number": "14",
+        "number": "11",
         "color": "#0288d1"
       },
       "geometry": {
@@ -1806,11 +1505,11 @@
     },
     {
       "type": "Feature",
-      "id": "15",
+      "id": "12",
       "properties": {
-        "id": "15",
+        "id": "12",
         "name": "M12 Daszyńskiego 23, Szeroka",
-        "number": "15",
+        "number": "12",
         "color": "#f57c00"
       },
       "geometry": {
@@ -1918,11 +1617,11 @@
     },
     {
       "type": "Feature",
-      "id": "16",
+      "id": "13",
       "properties": {
-        "id": "16",
+        "id": "13",
         "name": "M13 Wąska",
-        "number": "16",
+        "number": "13",
         "color": "#ffea00"
       },
       "geometry": {
@@ -1980,11 +1679,11 @@
     },
     {
       "type": "Feature",
-      "id": "17",
+      "id": "14",
       "properties": {
-        "id": "17",
+        "id": "14",
         "name": "M14 Piłsudskiego 1",
-        "number": "17",
+        "number": "14",
         "color": "#ffea00"
       },
       "geometry": {
@@ -2022,11 +1721,11 @@
     },
     {
       "type": "Feature",
-      "id": "18",
+      "id": "15",
       "properties": {
-        "id": "18",
+        "id": "15",
         "name": "M15 Piłsudskiego 4-16 3-47",
-        "number": "18",
+        "number": "15",
         "color": "#0288d1"
       },
       "geometry": {
@@ -2184,11 +1883,11 @@
     },
     {
       "type": "Feature",
-      "id": "19",
+      "id": "16",
       "properties": {
-        "id": "19",
+        "id": "16",
         "name": "M16 Piłsudskiego 20-30 39-55",
-        "number": "19",
+        "number": "16",
         "color": "#f57c00"
       },
       "geometry": {
@@ -2336,11 +2035,11 @@
     },
     {
       "type": "Feature",
-      "id": "20",
+      "id": "17",
       "properties": {
-        "id": "20",
+        "id": "17",
         "name": "M17 Mickiewicza, Zamkowa",
-        "number": "20",
+        "number": "17",
         "color": "#f57c00"
       },
       "geometry": {
@@ -2433,11 +2132,11 @@
     },
     {
       "type": "Feature",
-      "id": "21",
+      "id": "18",
       "properties": {
-        "id": "21",
+        "id": "18",
         "name": "M18 Słowackiego, Chramca",
-        "number": "21",
+        "number": "18",
         "color": "#ffea00"
       },
       "geometry": {
@@ -2565,11 +2264,11 @@
     },
     {
       "type": "Feature",
-      "id": "22",
+      "id": "19",
       "properties": {
-        "id": "22",
+        "id": "19",
         "name": "M19 Wyszyńskiego 1-4",
-        "number": "22",
+        "number": "19",
         "color": "#f57c00"
       },
       "geometry": {
@@ -2607,11 +2306,11 @@
     },
     {
       "type": "Feature",
-      "id": "23",
+      "id": "20",
       "properties": {
-        "id": "23",
+        "id": "20",
         "name": "M20 Wyszyńskiego 5, 6",
-        "number": "23",
+        "number": "20",
         "color": "#ff5252"
       },
       "geometry": {
@@ -2654,11 +2353,11 @@
     },
     {
       "type": "Feature",
-      "id": "24",
+      "id": "21",
       "properties": {
-        "id": "24",
+        "id": "21",
         "name": "M21 Szpitalna 2",
-        "number": "24",
+        "number": "21",
         "color": "#ff5252"
       },
       "geometry": {
@@ -2696,11 +2395,11 @@
     },
     {
       "type": "Feature",
-      "id": "25",
+      "id": "22",
       "properties": {
-        "id": "25",
+        "id": "22",
         "name": "M22 Podgórna",
-        "number": "25",
+        "number": "22",
         "color": "#7cb342"
       },
       "geometry": {
@@ -2883,11 +2582,11 @@
     },
     {
       "type": "Feature",
-      "id": "26",
+      "id": "23",
       "properties": {
-        "id": "26",
+        "id": "23",
         "name": "M23 Gorzycka (od Dworcowej do wiaduktu)",
-        "number": "26",
+        "number": "23",
         "color": "#0288d1"
       },
       "geometry": {
@@ -2980,11 +2679,11 @@
     },
     {
       "type": "Feature",
-      "id": "27",
+      "id": "24",
       "properties": {
-        "id": "27",
+        "id": "24",
         "name": "M24 Wjazdowa 1",
-        "number": "27",
+        "number": "24",
         "color": "#f57c00"
       },
       "geometry": {
@@ -3027,11 +2726,11 @@
     },
     {
       "type": "Feature",
-      "id": "28",
+      "id": "25",
       "properties": {
-        "id": "28",
+        "id": "25",
         "name": "M25 Wjazdowa 2, 3",
-        "number": "28",
+        "number": "25",
         "color": "#0288d1"
       },
       "geometry": {
@@ -3144,11 +2843,11 @@
     },
     {
       "type": "Feature",
-      "id": "29",
+      "id": "26",
       "properties": {
-        "id": "29",
+        "id": "26",
         "name": "M26 Wjazdowa 4, 6, 8, 12",
-        "number": "29",
+        "number": "26",
         "color": "#ffea00"
       },
       "geometry": {
@@ -3276,11 +2975,11 @@
     },
     {
       "type": "Feature",
-      "id": "30",
+      "id": "27",
       "properties": {
-        "id": "30",
+        "id": "27",
         "name": "M27 Moniuszki, Wieniawskiego, Paderewskiego, Szymanowskiego, Karłowicza, Jaskłócza, Wiatraczna",
-        "number": "30",
+        "number": "27",
         "color": "#f57c00"
       },
       "geometry": {
@@ -3383,11 +3082,11 @@
     },
     {
       "type": "Feature",
-      "id": "31",
+      "id": "28",
       "properties": {
-        "id": "31",
+        "id": "28",
         "name": "M28 Szpilmana, Noskowskiego, Lutosławskiego, Zagrodowa, Kurpińskiego, Jagodowa, Truskawkowa, Malinowa",
-        "number": "31",
+        "number": "28",
         "color": "#0288d1"
       },
       "geometry": {
@@ -3540,11 +3239,11 @@
     },
     {
       "type": "Feature",
-      "id": "32",
+      "id": "29",
       "properties": {
-        "id": "32",
+        "id": "29",
         "name": "M29 Wały Jana Kazimierza od ronda, Zaułek Rzeczny, Przy Wale, Dworzec, Muchocińska, Słodowy Młyn",
-        "number": "32",
+        "number": "29",
         "color": "#7cb342"
       },
       "geometry": {
@@ -4027,11 +3726,11 @@
     },
     {
       "type": "Feature",
-      "id": "33",
+      "id": "30",
       "properties": {
-        "id": "33",
+        "id": "30",
         "name": "M30 Dworcowa prawa strona",
-        "number": "33",
+        "number": "30",
         "color": "#ffea00"
       },
       "geometry": {
@@ -4159,11 +3858,11 @@
     },
     {
       "type": "Feature",
-      "id": "34",
+      "id": "31",
       "properties": {
-        "id": "34",
+        "id": "31",
         "name": "M31 Dworcowa 1-11 Nieparzyste",
-        "number": "34",
+        "number": "31",
         "color": "#0f9d58"
       },
       "geometry": {
@@ -4236,11 +3935,11 @@
     },
     {
       "type": "Feature",
-      "id": "35",
+      "id": "32",
       "properties": {
-        "id": "35",
+        "id": "32",
         "name": "M32 Dworcowa 13, 15",
-        "number": "35",
+        "number": "32",
         "color": "#ff5252"
       },
       "geometry": {
@@ -4298,11 +3997,11 @@
     },
     {
       "type": "Feature",
-      "id": "36",
+      "id": "33",
       "properties": {
-        "id": "36",
+        "id": "33",
         "name": "M33 Sienna, Usługowa, Kościelna",
-        "number": "36",
+        "number": "33",
         "color": "#ff5252"
       },
       "geometry": {
@@ -4500,11 +4199,11 @@
     },
     {
       "type": "Feature",
-      "id": "37",
+      "id": "34",
       "properties": {
-        "id": "37",
+        "id": "34",
         "name": "M34 Czynu 600-Lecia, Mostowa, Browarowa",
-        "number": "37",
+        "number": "34",
         "color": "#ff5252"
       },
       "geometry": {
@@ -4827,11 +4526,11 @@
     },
     {
       "type": "Feature",
-      "id": "38",
+      "id": "35",
       "properties": {
-        "id": "38",
+        "id": "35",
         "name": "M35 Rynek, Rynkowa, Kilińskiego",
-        "number": "38",
+        "number": "35",
         "color": "#0288d1"
       },
       "geometry": {
@@ -4999,11 +4698,11 @@
     },
     {
       "type": "Feature",
-      "id": "39",
+      "id": "36",
       "properties": {
-        "id": "39",
+        "id": "36",
         "name": "M36 17 Stycznia 1-85 Nieparzyste",
-        "number": "39",
+        "number": "36",
         "color": "#0f9d58"
       },
       "geometry": {
@@ -5256,11 +4955,11 @@
     },
     {
       "type": "Feature",
-      "id": "40",
+      "id": "37",
       "properties": {
-        "id": "40",
+        "id": "37",
         "name": "M37 17 Stycznia 2-66 Parzyste",
-        "number": "40",
+        "number": "37",
         "color": "#ffea00"
       },
       "geometry": {
@@ -5518,11 +5217,11 @@
     },
     {
       "type": "Feature",
-      "id": "41",
+      "id": "38",
       "properties": {
-        "id": "41",
+        "id": "38",
         "name": "M38 17 Stycznia 87-155 Nieparzyste",
-        "number": "41",
+        "number": "38",
         "color": "#f57c00"
       },
       "geometry": {
@@ -5790,11 +5489,11 @@
     },
     {
       "type": "Feature",
-      "id": "42",
+      "id": "39",
       "properties": {
-        "id": "42",
+        "id": "39",
         "name": "M39 17 Stycznia 68-120 Parzyste",
-        "number": "42",
+        "number": "39",
         "color": "#7cb342"
       },
       "geometry": {
@@ -5927,11 +5626,11 @@
     },
     {
       "type": "Feature",
-      "id": "43",
+      "id": "40",
       "properties": {
-        "id": "43",
+        "id": "40",
         "name": "M40 Nadjeziorna, Rybacka, Spichrzowa, Zewnętrzna",
-        "number": "43",
+        "number": "40",
         "color": "#f57c00"
       },
       "geometry": {
@@ -6054,11 +5753,11 @@
     },
     {
       "type": "Feature",
-      "id": "44",
+      "id": "41",
       "properties": {
-        "id": "44",
+        "id": "41",
         "name": "M41 Tietza, 3 Maja, Szkolna, Pl. Kościuszki",
-        "number": "44",
+        "number": "41",
         "color": "#0097a7"
       },
       "geometry": {
@@ -6276,11 +5975,11 @@
     },
     {
       "type": "Feature",
-      "id": "45",
+      "id": "42",
       "properties": {
-        "id": "45",
+        "id": "42",
         "name": "M42 Sportowa, Strażacka, Pl. Rolny, Rolna",
-        "number": "45",
+        "number": "42",
         "color": "#ffea00"
       },
       "geometry": {
@@ -6408,11 +6107,11 @@
     },
     {
       "type": "Feature",
-      "id": "46",
+      "id": "43",
       "properties": {
-        "id": "46",
+        "id": "43",
         "name": "M43 Pocztowa, Iczka, Sokoła",
-        "number": "46",
+        "number": "43",
         "color": "#ff5252"
       },
       "geometry": {
@@ -6685,11 +6384,11 @@
     },
     {
       "type": "Feature",
-      "id": "47",
+      "id": "44",
       "properties": {
-        "id": "47",
+        "id": "44",
         "name": "M44 Jana Pawła II prawa strona",
-        "number": "47",
+        "number": "44",
         "color": "#ffea00"
       },
       "geometry": {
@@ -6842,11 +6541,11 @@
     },
     {
       "type": "Feature",
-      "id": "48",
+      "id": "45",
       "properties": {
-        "id": "48",
+        "id": "45",
         "name": "M45 Jana Pawła II lewa strona",
-        "number": "48",
+        "number": "45",
         "color": "#ff5252"
       },
       "geometry": {
@@ -7059,11 +6758,11 @@
     },
     {
       "type": "Feature",
-      "id": "49",
+      "id": "46",
       "properties": {
-        "id": "49",
+        "id": "46",
         "name": "M46 Słoneczna, Nowa, Na Skarpie,",
-        "number": "49",
+        "number": "46",
         "color": "#7cb342"
       },
       "geometry": {
@@ -7406,11 +7105,11 @@
     },
     {
       "type": "Feature",
-      "id": "50",
+      "id": "47",
       "properties": {
-        "id": "50",
+        "id": "47",
         "name": "M47 Armii Poznań 1 do piaskowej, Piaskowa, Tęczowa, Prusimska",
-        "number": "50",
+        "number": "47",
         "color": "#ff5252"
       },
       "geometry": {
@@ -7553,11 +7252,11 @@
     },
     {
       "type": "Feature",
-      "id": "51",
+      "id": "48",
       "properties": {
-        "id": "51",
+        "id": "48",
         "name": "M48 Armii Poznań od Piaskowej do końca",
-        "number": "51",
+        "number": "48",
         "color": "#ffea00"
       },
       "geometry": {
@@ -7810,11 +7509,11 @@
     },
     {
       "type": "Feature",
-      "id": "52",
+      "id": "49",
       "properties": {
-        "id": "52",
+        "id": "49",
         "name": "M49 Kwiatowa, Bzowa",
-        "number": "52",
+        "number": "49",
         "color": "#7cb342"
       },
       "geometry": {
@@ -8012,11 +7711,11 @@
     },
     {
       "type": "Feature",
-      "id": "53",
+      "id": "50",
       "properties": {
-        "id": "53",
+        "id": "50",
         "name": "M50 Fiołkowa, Narcyzowa, Storczykowa",
-        "number": "53",
+        "number": "50",
         "color": "#0288d1"
       },
       "geometry": {
@@ -8179,11 +7878,11 @@
     },
     {
       "type": "Feature",
-      "id": "54",
+      "id": "51",
       "properties": {
-        "id": "54",
+        "id": "51",
         "name": "M51 Konwaliowa, Różana, Goździkowa, Jaśminowa",
-        "number": "54",
+        "number": "51",
         "color": "#f57c00"
       },
       "geometry": {
@@ -8331,11 +8030,11 @@
     },
     {
       "type": "Feature",
-      "id": "55",
+      "id": "52",
       "properties": {
-        "id": "55",
+        "id": "52",
         "name": "M52 Nadbrzeżna, Garbarska, Składowa, Wioślarska, Gazownicza, Wały Jana Kazimierza do ronda",
-        "number": "55",
+        "number": "52",
         "color": "#0288d1"
       },
       "geometry": {
@@ -8753,11 +8452,11 @@
     },
     {
       "type": "Feature",
-      "id": "56",
+      "id": "53",
       "properties": {
-        "id": "56",
+        "id": "53",
         "name": "M53 Drukarska, Portowa",
-        "number": "56",
+        "number": "53",
         "color": "#ffea00"
       },
       "geometry": {
@@ -8930,11 +8629,11 @@
     },
     {
       "type": "Feature",
-      "id": "57",
+      "id": "54",
       "properties": {
-        "id": "57",
+        "id": "54",
         "name": "M54 Chrobrego 1-20 obie strony, Wigury",
-        "number": "57",
+        "number": "54",
         "color": "#7cb342"
       },
       "geometry": {
@@ -9072,11 +8771,11 @@
     },
     {
       "type": "Feature",
-      "id": "58",
+      "id": "55",
       "properties": {
-        "id": "58",
+        "id": "55",
         "name": "M55 Chrobrego 21-40 obie strony",
-        "number": "58",
+        "number": "55",
         "color": "#f57c00"
       },
       "geometry": {
@@ -9214,11 +8913,11 @@
     },
     {
       "type": "Feature",
-      "id": "59",
+      "id": "56",
       "properties": {
-        "id": "59",
+        "id": "56",
         "name": "M56 Sikorskiego 1,3,20, 29-47, 2-20, Dworzec, Letnisko",
-        "number": "59",
+        "number": "56",
         "color": "#0288d1"
       },
       "geometry": {
@@ -9456,11 +9155,11 @@
     },
     {
       "type": "Feature",
-      "id": "60",
+      "id": "57",
       "properties": {
-        "id": "60",
+        "id": "57",
         "name": "M57 Sikorskiego 5, 9",
-        "number": "60",
+        "number": "57",
         "color": "#f57c00"
       },
       "geometry": {
@@ -9518,11 +9217,11 @@
     },
     {
       "type": "Feature",
-      "id": "61",
+      "id": "58",
       "properties": {
-        "id": "61",
+        "id": "58",
         "name": "M58 Sikorskiego 11, 13",
-        "number": "61",
+        "number": "58",
         "color": "#7cb342"
       },
       "geometry": {
@@ -9560,11 +9259,11 @@
     },
     {
       "type": "Feature",
-      "id": "62",
+      "id": "59",
       "properties": {
-        "id": "62",
+        "id": "59",
         "name": "M59 Sikorskiego 15, 17, 19",
-        "number": "62",
+        "number": "59",
         "color": "#ff5252"
       },
       "geometry": {
@@ -9632,11 +9331,11 @@
     },
     {
       "type": "Feature",
-      "id": "63",
+      "id": "60",
       "properties": {
-        "id": "63",
+        "id": "60",
         "name": "M60 Sikorskiego 21, 23, 25",
-        "number": "63",
+        "number": "60",
         "color": "#ffea00"
       },
       "geometry": {
@@ -9714,11 +9413,11 @@
     },
     {
       "type": "Feature",
-      "id": "64",
+      "id": "61",
       "properties": {
-        "id": "64",
+        "id": "61",
         "name": "M61 Polna, Krótka",
-        "number": "64",
+        "number": "61",
         "color": "#f57c00"
       },
       "geometry": {
@@ -9906,11 +9605,11 @@
     },
     {
       "type": "Feature",
-      "id": "65",
+      "id": "62",
       "properties": {
-        "id": "65",
+        "id": "62",
         "name": "M62 Dworkowa, Witosa, Drzymały",
-        "number": "65",
+        "number": "62",
         "color": "#0288d1"
       },
       "geometry": {
@@ -10093,11 +9792,11 @@
     },
     {
       "type": "Feature",
-      "id": "66",
+      "id": "63",
       "properties": {
-        "id": "66",
+        "id": "63",
         "name": "M63 Owcza, Kozia, Gospodarcza, Hubala, Rzemieślnicza, Przemysłowa",
-        "number": "66",
+        "number": "63",
         "color": "#afb42b"
       },
       "geometry": {
@@ -10360,11 +10059,11 @@
     },
     {
       "type": "Feature",
-      "id": "67",
+      "id": "64",
       "properties": {
-        "id": "67",
+        "id": "64",
         "name": "M64 Lubuska, Mieszka 1, Dąbrówki, Piastów, Polan, Kasztelańska, Lecha",
-        "number": "67",
+        "number": "64",
         "color": "#f57c00"
       },
       "geometry": {
@@ -10412,11 +10111,11 @@
     },
     {
       "type": "Feature",
-      "id": "68",
+      "id": "65",
       "properties": {
-        "id": "68",
+        "id": "65",
         "name": "M65 Gorzycka (od wiaduktu do końca) Chopina, Bacewicza, Nowowiejskiego, Rutkowskiego",
-        "number": "68",
+        "number": "65",
         "color": "#ff5252"
       },
       "geometry": {
@@ -10624,11 +10323,11 @@
     },
     {
       "type": "Feature",
-      "id": "69",
+      "id": "66",
       "properties": {
-        "id": "69",
+        "id": "66",
         "name": "M66 Remiszewskiej Kinala",
-        "number": "69",
+        "number": "66",
         "color": "#f57c00"
       },
       "geometry": {
@@ -10743,6 +10442,1158 @@
             [
               15.910358,
               52.6011698,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "67",
+      "properties": {
+        "id": "67",
+        "name": "W01 Głażewo",
+        "number": "67",
+        "color": "#000000"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              15.9152109,
+              52.535467,
+              0
+            ],
+            [
+              15.9092544,
+              52.5344174,
+              0
+            ],
+            [
+              15.9093059,
+              52.5328407,
+              0
+            ],
+            [
+              15.9145287,
+              52.5325927,
+              0
+            ],
+            [
+              15.915078,
+              52.5301308,
+              0
+            ],
+            [
+              15.9169491,
+              52.5300577,
+              0
+            ],
+            [
+              15.9244164,
+              52.5313631,
+              0
+            ],
+            [
+              15.9249227,
+              52.53064,
+              0
+            ],
+            [
+              15.9242189,
+              52.5283426,
+              0
+            ],
+            [
+              15.9223306,
+              52.5277473,
+              0
+            ],
+            [
+              15.9227082,
+              52.5258988,
+              0
+            ],
+            [
+              15.9277379,
+              52.5259719,
+              0
+            ],
+            [
+              15.9286477,
+              52.5242068,
+              0
+            ],
+            [
+              15.9300553,
+              52.5243348,
+              0
+            ],
+            [
+              15.9289567,
+              52.5261207,
+              0
+            ],
+            [
+              15.9278752,
+              52.5263087,
+              0
+            ],
+            [
+              15.9252703,
+              52.5307053,
+              0
+            ],
+            [
+              15.9319822,
+              52.5306949,
+              0
+            ],
+            [
+              15.9318106,
+              52.5333473,
+              0
+            ],
+            [
+              15.9287722,
+              52.5335352,
+              0
+            ],
+            [
+              15.9271414,
+              52.5347883,
+              0
+            ],
+            [
+              15.9226782,
+              52.5359264,
+              0
+            ],
+            [
+              15.9177687,
+              52.535822,
+              0
+            ],
+            [
+              15.9152109,
+              52.535467,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "68",
+      "properties": {
+        "id": "68",
+        "name": "W02 Gralewo",
+        "number": "68",
+        "color": "#000000"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              15.946231,
+              52.5337306,
+              0
+            ],
+            [
+              15.9516199,
+              52.5345238,
+              0
+            ],
+            [
+              15.9524096,
+              52.5340017,
+              0
+            ],
+            [
+              15.9523066,
+              52.5316418,
+              0
+            ],
+            [
+              15.949766,
+              52.5305139,
+              0
+            ],
+            [
+              15.9519976,
+              52.5250207,
+              0
+            ],
+            [
+              15.9639109,
+              52.5274228,
+              0
+            ],
+            [
+              15.9621869,
+              52.5312061,
+              0
+            ],
+            [
+              15.9599725,
+              52.5321355,
+              0
+            ],
+            [
+              15.9626461,
+              52.5323209,
+              0
+            ],
+            [
+              15.964809,
+              52.5340021,
+              0
+            ],
+            [
+              15.9684311,
+              52.5360173,
+              0
+            ],
+            [
+              15.9757439,
+              52.5371659,
+              0
+            ],
+            [
+              15.976379,
+              52.5356728,
+              0
+            ],
+            [
+              15.9752975,
+              52.5355057,
+              0
+            ],
+            [
+              15.9758297,
+              52.5344406,
+              0
+            ],
+            [
+              15.9773918,
+              52.5346703,
+              0
+            ],
+            [
+              15.976173,
+              52.5374269,
+              0
+            ],
+            [
+              15.9682251,
+              52.5361739,
+              0
+            ],
+            [
+              15.9646374,
+              52.5341065,
+              0
+            ],
+            [
+              15.9625431,
+              52.5324879,
+              0
+            ],
+            [
+              15.9595047,
+              52.5322791,
+              0
+            ],
+            [
+              15.9585391,
+              52.5330388,
+              0
+            ],
+            [
+              15.9565135,
+              52.5339681,
+              0
+            ],
+            [
+              15.9562045,
+              52.5349183,
+              0
+            ],
+            [
+              15.9608909,
+              52.5356806,
+              0
+            ],
+            [
+              15.96029,
+              52.5368605,
+              0
+            ],
+            [
+              15.9555694,
+              52.5361505,
+              0
+            ],
+            [
+              15.9536639,
+              52.5398779,
+              0
+            ],
+            [
+              15.9500419,
+              52.5393846,
+              0
+            ],
+            [
+              15.9521361,
+              52.5355997,
+              0
+            ],
+            [
+              15.9456817,
+              52.5345764,
+              0
+            ],
+            [
+              15.946231,
+              52.5337306,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "69",
+      "properties": {
+        "id": "69",
+        "name": "W03 Kamionna Lewa strona",
+        "number": "69",
+        "color": "#0288d1"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              15.9370495,
+              52.5717968,
+              0
+            ],
+            [
+              15.9387498,
+              52.5698964,
+              0
+            ],
+            [
+              15.9412475,
+              52.5704232,
+              0
+            ],
+            [
+              15.9421401,
+              52.5700789,
+              0
+            ],
+            [
+              15.9458029,
+              52.5691621,
+              0
+            ],
+            [
+              15.9474959,
+              52.567794,
+              0
+            ],
+            [
+              15.9484658,
+              52.567194,
+              0
+            ],
+            [
+              15.9477019,
+              52.5669853,
+              0
+            ],
+            [
+              15.9480452,
+              52.5666358,
+              0
+            ],
+            [
+              15.9498391,
+              52.5661349,
+              0
+            ],
+            [
+              15.946304,
+              52.5661617,
+              0
+            ],
+            [
+              15.9463469,
+              52.566806,
+              0
+            ],
+            [
+              15.9449178,
+              52.5668138,
+              0
+            ],
+            [
+              15.9447847,
+              52.566253,
+              0
+            ],
+            [
+              15.9451103,
+              52.566103,
+              0
+            ],
+            [
+              15.9502923,
+              52.5660313,
+              0
+            ],
+            [
+              15.9526183,
+              52.5659582,
+              0
+            ],
+            [
+              15.9549486,
+              52.5657939,
+              0
+            ],
+            [
+              15.9565279,
+              52.5656583,
+              0
+            ],
+            [
+              15.9571974,
+              52.5654965,
+              0
+            ],
+            [
+              15.9577081,
+              52.5651796,
+              0
+            ],
+            [
+              15.958163,
+              52.5648248,
+              0
+            ],
+            [
+              15.9586351,
+              52.5645431,
+              0
+            ],
+            [
+              15.9591672,
+              52.5643918,
+              0
+            ],
+            [
+              15.9596565,
+              52.5643552,
+              0
+            ],
+            [
+              15.9647796,
+              52.5646271,
+              0
+            ],
+            [
+              15.9642668,
+              52.5663749,
+              0
+            ],
+            [
+              15.9653568,
+              52.5666983,
+              0
+            ],
+            [
+              15.9658203,
+              52.5663383,
+              0
+            ],
+            [
+              15.9661636,
+              52.5664635,
+              0
+            ],
+            [
+              15.9658632,
+              52.5668809,
+              0
+            ],
+            [
+              15.9678502,
+              52.5675578,
+              0
+            ],
+            [
+              15.9701919,
+              52.570321,
+              0
+            ],
+            [
+              15.9680977,
+              52.5733674,
+              0
+            ],
+            [
+              15.9686298,
+              52.5739099,
+              0
+            ],
+            [
+              15.9676342,
+              52.5744732,
+              0
+            ],
+            [
+              15.9683723,
+              52.575287,
+              0
+            ],
+            [
+              15.9668789,
+              52.5757668,
+              0
+            ],
+            [
+              15.9659862,
+              52.5751305,
+              0
+            ],
+            [
+              15.9664497,
+              52.5746506,
+              0
+            ],
+            [
+              15.9655742,
+              52.5741916,
+              0
+            ],
+            [
+              15.9665613,
+              52.5729058,
+              0
+            ],
+            [
+              15.9678144,
+              52.5733231,
+              0
+            ],
+            [
+              15.9698744,
+              52.5702036,
+              0
+            ],
+            [
+              15.9675226,
+              52.5676056,
+              0
+            ],
+            [
+              15.9654455,
+              52.568482,
+              0
+            ],
+            [
+              15.9597807,
+              52.56651,
+              0
+            ],
+            [
+              15.9582872,
+              52.5670317,
+              0
+            ],
+            [
+              15.9535494,
+              52.5697028,
+              0
+            ],
+            [
+              15.9496484,
+              52.5737065,
+              0
+            ],
+            [
+              15.9505067,
+              52.5751253,
+              0
+            ],
+            [
+              15.9504037,
+              52.5762311,
+              0
+            ],
+            [
+              15.9525494,
+              52.5769613,
+              0
+            ],
+            [
+              15.9524808,
+              52.5778584,
+              0
+            ],
+            [
+              15.9495282,
+              52.5774516,
+              0
+            ],
+            [
+              15.9500775,
+              52.575167,
+              0
+            ],
+            [
+              15.9492364,
+              52.5736673,
+              0
+            ],
+            [
+              15.9528069,
+              52.5698697,
+              0
+            ],
+            [
+              15.9512105,
+              52.5700888,
+              0
+            ],
+            [
+              15.950644,
+              52.570767,
+              0
+            ],
+            [
+              15.9498029,
+              52.5705062,
+              0
+            ],
+            [
+              15.950232,
+              52.5699532,
+              0
+            ],
+            [
+              15.9532017,
+              52.5696506,
+              0
+            ],
+            [
+              15.9533047,
+              52.5675952,
+              0
+            ],
+            [
+              15.9546265,
+              52.5665831,
+              0
+            ],
+            [
+              15.9541802,
+              52.5661761,
+              0
+            ],
+            [
+              15.9522576,
+              52.5663848,
+              0
+            ],
+            [
+              15.9502492,
+              52.5676682,
+              0
+            ],
+            [
+              15.9482407,
+              52.5678456,
+              0
+            ],
+            [
+              15.9459705,
+              52.5693428,
+              0
+            ],
+            [
+              15.9409548,
+              52.5707274,
+              0
+            ],
+            [
+              15.939427,
+              52.5704039,
+              0
+            ],
+            [
+              15.9387146,
+              52.5705291,
+              0
+            ],
+            [
+              15.9377104,
+              52.5719689,
+              0
+            ],
+            [
+              15.9370495,
+              52.5717968,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "70",
+      "properties": {
+        "id": "70",
+        "name": "W08 Dzięcielin, Wiktorowo",
+        "number": "70",
+        "color": "#ffea00"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              15.9083044,
+              52.5963493,
+              0
+            ],
+            [
+              15.9072958,
+              52.5962711,
+              0
+            ],
+            [
+              15.9078194,
+              52.594094,
+              0
+            ],
+            [
+              15.909727,
+              52.5876811,
+              0
+            ],
+            [
+              15.9108398,
+              52.5854327,
+              0
+            ],
+            [
+              15.9115865,
+              52.5854431,
+              0
+            ],
+            [
+              15.9129169,
+              52.5822814,
+              0
+            ],
+            [
+              15.9109085,
+              52.5820885,
+              0
+            ],
+            [
+              15.9112775,
+              52.5810924,
+              0
+            ],
+            [
+              15.9144018,
+              52.5813844,
+              0
+            ],
+            [
+              15.9148738,
+              52.5805082,
+              0
+            ],
+            [
+              15.9163029,
+              52.5774649,
+              0
+            ],
+            [
+              15.9245706,
+              52.5744304,
+              0
+            ],
+            [
+              15.9246921,
+              52.5755343,
+              0
+            ],
+            [
+              15.9237014,
+              52.575682,
+              0
+            ],
+            [
+              15.9234849,
+              52.5751951,
+              0
+            ],
+            [
+              15.9166176,
+              52.5775335,
+              0
+            ],
+            [
+              15.9152007,
+              52.5805933,
+              0
+            ],
+            [
+              15.9170883,
+              52.5809411,
+              0
+            ],
+            [
+              15.9191396,
+              52.5801692,
+              0
+            ],
+            [
+              15.9197404,
+              52.5803569,
+              0
+            ],
+            [
+              15.9207275,
+              52.5799684,
+              0
+            ],
+            [
+              15.9219291,
+              52.5804521,
+              0
+            ],
+            [
+              15.923281,
+              52.5804202,
+              0
+            ],
+            [
+              15.9235706,
+              52.5816559,
+              0
+            ],
+            [
+              15.9257968,
+              52.5819348,
+              0
+            ],
+            [
+              15.9276945,
+              52.5816834,
+              0
+            ],
+            [
+              15.9296089,
+              52.5817664,
+              0
+            ],
+            [
+              15.9313172,
+              52.5810776,
+              0
+            ],
+            [
+              15.9343772,
+              52.5813538,
+              0
+            ],
+            [
+              15.9340815,
+              52.5818995,
+              0
+            ],
+            [
+              15.9328845,
+              52.5818064,
+              0
+            ],
+            [
+              15.9329643,
+              52.581433,
+              0
+            ],
+            [
+              15.9320172,
+              52.5813049,
+              0
+            ],
+            [
+              15.9308984,
+              52.5815289,
+              0
+            ],
+            [
+              15.9300346,
+              52.5819575,
+              0
+            ],
+            [
+              15.9259468,
+              52.5821366,
+              0
+            ],
+            [
+              15.9232215,
+              52.581843,
+              0
+            ],
+            [
+              15.9230066,
+              52.58063,
+              0
+            ],
+            [
+              15.9218043,
+              52.580629,
+              0
+            ],
+            [
+              15.9206443,
+              52.5802358,
+              0
+            ],
+            [
+              15.9196546,
+              52.580649,
+              0
+            ],
+            [
+              15.9149511,
+              52.5831628,
+              0
+            ],
+            [
+              15.9141443,
+              52.5851915,
+              0
+            ],
+            [
+              15.9160068,
+              52.5854079,
+              0
+            ],
+            [
+              15.9148932,
+              52.5894479,
+              0
+            ],
+            [
+              15.9139254,
+              52.5893632,
+              0
+            ],
+            [
+              15.9103119,
+              52.5965298,
+              0
+            ],
+            [
+              15.9083044,
+              52.5963493,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "71",
+      "properties": {
+        "id": "71",
+        "name": "W19 Wielowieś lewa strona",
+        "number": "71",
+        "color": "#f9a825"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              15.8950654,
+              52.5920526,
+              0
+            ],
+            [
+              15.8949602,
+              52.5920474,
+              0
+            ],
+            [
+              15.8904084,
+              52.5874566,
+              0
+            ],
+            [
+              15.8907733,
+              52.5864658,
+              0
+            ],
+            [
+              15.893477,
+              52.5866457,
+              0
+            ],
+            [
+              15.8937988,
+              52.5850865,
+              0
+            ],
+            [
+              15.8897755,
+              52.5842091,
+              0
+            ],
+            [
+              15.8898077,
+              52.5835402,
+              0
+            ],
+            [
+              15.8958479,
+              52.5841504,
+              0
+            ],
+            [
+              15.8973688,
+              52.5785398,
+              0
+            ],
+            [
+              15.8965507,
+              52.5745197,
+              0
+            ],
+            [
+              15.8976812,
+              52.5744067,
+              0
+            ],
+            [
+              15.8984181,
+              52.576893,
+              0
+            ],
+            [
+              15.8987008,
+              52.5776667,
+              0
+            ],
+            [
+              15.898726,
+              52.5784404,
+              0
+            ],
+            [
+              15.8963952,
+              52.5868465,
+              0
+            ],
+            [
+              15.8950654,
+              52.5920526,
+              0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "72",
+      "properties": {
+        "id": "72",
+        "name": "W20 Wielowieś prawa strona",
+        "number": "72",
+        "color": "#7cb342"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              15.898241,
+              52.5892868,
+              0
+            ],
+            [
+              15.8971095,
+              52.5893433,
+              0
+            ],
+            [
+              15.8960852,
+              52.5890216,
+              0
+            ],
+            [
+              15.8989506,
+              52.578379,
+              0
+            ],
+            [
+              15.898802,
+              52.5773024,
+              0
+            ],
+            [
+              15.8979471,
+              52.5745498,
+              0
+            ],
+            [
+              15.8991688,
+              52.5744196,
+              0
+            ],
+            [
+              15.9000479,
+              52.5771777,
+              0
+            ],
+            [
+              15.8994791,
+              52.5819469,
+              0
+            ],
+            [
+              15.8992109,
+              52.583535,
+              0
+            ],
+            [
+              15.8985673,
+              52.5855271,
+              0
+            ],
+            [
+              15.898241,
+              52.5892868,
               0
             ]
           ]
